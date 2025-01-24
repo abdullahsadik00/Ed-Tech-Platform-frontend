@@ -1,0 +1,135 @@
+/* Footer.css */
+
+.footer {
+    background-color: #323842;
+    /* Background color */
+    /* padding: 2rem 0; */
+    /* Padding */
+}
+
+.footer h3 {
+    font-weight: bold;
+    color: white;
+}
+
+.footer p {
+    color: white;
+    margin: 0.5rem 0;
+}
+
+.footer a {
+    color: white;
+    /* Link color */
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+    /* Underline on hover */
+}
+
+.footer img {
+    width: 24px;
+    /* Adjust icon size */
+    height: 24px;
+}
+
+.footer .divider {
+    border-top: 1px solid white;
+    /* Divider style */
+    margin: 1rem 0;
+    /* Margin for divider */
+}
+
+/* Media Queries */
+
+/* Small devices (mobile) */
+@media (max-width: 640px) {
+    footer .container {
+        max-width: 600px;
+    }
+
+    footer .container .wrapper div {
+        width: 100%;
+        /* padding: 0 1rem; */
+        margin-top: 10px;
+    }
+
+    .wrapper div:last-child p {
+        margin-bottom: 16px;
+    }
+
+    .wrapper {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .copyright {
+        text-align: center;
+    }
+
+    .socialIcons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .copyright {
+        padding-top: 8px;
+    }
+
+}
+
+/* Medium devices (tablet) */
+@media (min-width: 641px) and (max-width: 1023px) {
+    footer .container {
+        min-width: 600px;
+        max-width: 900px;
+    }
+
+    footer .container .wrapper div {
+        width: 50%;
+        /* padding: 0 1rem; */
+        /* margin-top: 10px; */
+    }
+
+    .wrapper {
+        flex-direction: row;
+        align-items: center;
+        padding: 10px;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        margin: 20px;
+    }
+
+    .copyright {
+        text-align: center;
+    }
+
+    .socialIcons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .copyright {
+        padding-top: 8px;
+    }
+
+
+}
+
+/* Large devices (desktop) */
+@media (min-width: 1024px) {
+    footer .container {
+        max-width: 900px;
+    }
+
+}

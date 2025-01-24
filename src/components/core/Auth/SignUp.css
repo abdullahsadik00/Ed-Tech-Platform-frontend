@@ -1,0 +1,30 @@
+/* Media Queries */
+
+/* Small devices (mobile) */
+@media (max-width: 640px) {
+    .SignUp div {
+        padding-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .SignUp div .left {
+        display: none;
+    }
+
+    .SignUp div .right {
+        width: 100%;
+        margin: 40px;
+    }
+
+    .right div div:last-child p {
+        margin-top: 4px;
+    }
+}
+
+/* Medium devices (tablet) */
+@media (min-width: 641px) and (max-width: 1023px) {
+    .SignUp div {}
+}
+
+/* Large devices (desktop) */
+@media (min-width: 1024px) {}

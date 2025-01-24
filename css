@@ -1,0 +1,17 @@
+/* Media Queries */
+
+/* Small devices (mobile) */
+@media (max-width: 640px) {}
+
+/* Medium devices (tablet) */
+@media (min-width: 641px) and (max-width: 1023px) {}
+
+/* Large devices (desktop) */
+@media (min-width: 1024px) {}
+
+/* <h2 className="font-poppins font-semibold leading-5 tracking-wide text-xl">
+Edit Profile
+</h2>
+<p className="font-normal text-left font-lato text-lg tracking-wide leading-7 text-[#8c8c8c]">
+Select a profile type to edit the relevant details.
+</p> */
