@@ -7,7 +7,7 @@ const Tag = ({ label, active = false, onClick }) => {
       className={`tag px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
         active
           ? 'bg-primary-400 text-white'
-          : 'bg-gray-100 text-text-light hover:bg-gray-200'
+          : 'bg-gray-100 text-text-light hover:bg-gray-200 dark:bg-zinc-800 dark:text-zinc-200'
       }`}
     >
       {label}

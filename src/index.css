@@ -1,16 +1,88 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* styles.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-
   font-family: 'Inter', sans-serif;
 }
 
 @layer base {
+  * {
+    @apply border-border dark:border-border-dark;
+  }
+
+  body {
+    @apply bg-background text-foreground dark:bg-background-dark dark:text-foreground-dark;
+  }
+}
+
+@layer utilities {
+  .dark ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    @apply bg-zinc-800;
+    border-radius: 6px;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-600;
+    border-radius: 6px;
+    border: 3px solid transparent;
+    border-color: transparent;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    @apply bg-zinc-500;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:active {
+    @apply bg-zinc-400;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #cccccc;
+    border-radius: 6px;
+    border: 3px solid transparent;
+    border-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #999999;
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background: #777777;
+  }
+}
+
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'); */
+
+/* styles.css */
+/* @tailwind base; */
+/* @tailwind components; */
+/* @tailwind utilities; */
+
+/* body {
+
+  font-family: 'Inter', sans-serif;
+} */
+
+/* @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -132,9 +204,9 @@ body {
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
   }
-}
+} */
 
-@layer base {
+/* @layer base {
   * {
     @apply border-border;
   }
@@ -142,7 +214,7 @@ body {
   body {
     @apply bg-background text-foreground;
   }
-}
+} */
 
 @layer utilities {
 

@@ -26,7 +26,7 @@ const CourseHeaderThumbnail = ({ onSelect, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl w-full max-w-2xl p-6 max-h-[90vh] overflow-y-auto">
+      <div className="bg-white rounded-xl w-full max-w-2xl p-6 max-h-[90vh] overflow-y-auto dark:bg-zinc-800 dark:text-zinc-200">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold">Update thumbnail</h2>
           <button
@@ -108,7 +108,7 @@ const CourseHeaderThumbnail = ({ onSelect, onClose }) => {
         <div className="flex justify-end gap-3 mt-6 pt-4 border-t">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg"
+            className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-zinc-300 bg-white dark:bg-zinc-800 border border-gray-300 dark:border-zinc-600 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-700"
           >
             Cancel
           </button>
