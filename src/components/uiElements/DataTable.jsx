@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { ChevronUp, ChevronDown } from 'lucide-react';
 import Pagination from './Pagination';
 
@@ -12,10 +12,10 @@ const DataTable = ({
 }) => {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
   const [currentPage, setCurrentPage] = useState(1);
-
+  console.log('SS: data', data);
   // Sorting logic
   const sortedData = useMemo(() => {
-    let sortableData = [...data];
+    const sortableData = [...data];
     if (sortConfig.key) {
       sortableData.sort((a, b) => {
         const aValue = a[sortConfig.key];
@@ -57,7 +57,7 @@ const DataTable = ({
 
   return (
     <div
-      className={`rounded-xl border border-border bg-white text-card-foreground shadow-sm ${className}`}
+      className={`rounded-xl border border-border bg-white text-foreground shadow-sm ${className}`}
     >
       {(title || actions) && (
         <div className="flex items-center justify-between p-6">

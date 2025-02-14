@@ -4,13 +4,17 @@ import App from './App';
 import { ThemeProvider } from './providers/ThemeProvider';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
+import { createTheme, MantineProvider } from '@mantine/core';
+const theme = createTheme({
+  /** Put your mantine theme override here */
+});
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+      <MantineProvider theme={theme}>
         <App />
-      </ThemeProvider>
+      </MantineProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

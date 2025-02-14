@@ -1,4 +1,3 @@
-import React from 'react';
 import { Menu } from 'lucide-react';
 
 const MobileMenuButton = ({ toggleMobileSidebar }) => {
@@ -7,7 +6,7 @@ const MobileMenuButton = ({ toggleMobileSidebar }) => {
       onClick={toggleMobileSidebar}
       className="fixed top-4 left-4 z-50 p-2 rounded-lg bg-white shadow-lg md:hidden"
     >
-      <Menu className="w-6 h-6 text-gray-700" />
+      <Menu className="w-6 h-6 text-primary-600" />
     </button>
   );
 };

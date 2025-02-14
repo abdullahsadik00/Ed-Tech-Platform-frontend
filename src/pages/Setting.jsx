@@ -25,7 +25,7 @@ const Setting = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen bg-gradient-to-b from-primary-50 to-primary-200 dark:from-zinc-950 dark:to-zinc-700 p-6"
+      className="min-h-screen bg-gradient-to-l from-primary-light to-primary-lightest dark:from-zinc-950 dark:to-zinc-700 p-6"
     >
       <motion.div
         initial={{ y: 20, opacity: 0 }}

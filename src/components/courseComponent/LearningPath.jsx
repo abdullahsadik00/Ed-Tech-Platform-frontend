@@ -41,7 +41,7 @@ function SortableItem({ item, onEdit, contentTypes }) {
       {...attributes}
       {...listeners}
     >
-      <div className="flex items-start gap-4">
+      <div className="flex items-start gap-4 sortableItem">
         <div className="bg-orange-100 p-2 rounded hover:scale-110 active:scale-90 transition-transform">
           {contentTypes.find((t) => t.type === item.type)?.icon || '📄'}
         </div>

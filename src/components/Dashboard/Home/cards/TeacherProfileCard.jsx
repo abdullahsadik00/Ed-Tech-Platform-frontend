@@ -24,8 +24,8 @@ const TeacherProfileCard = () => {
   const prevMonth = () => setCurrentDate(subMonths(currentDate, 1));
 
   return (
-    <div className="rounded-xl border border-border bg-white text-card-foreground shadow-sm dark:bg-card dark:border-border">
-      <div className="border-b border-border p-6">
+    <div className="rounded-xl bg-white text-foreground shadow-lg dark:bg-primary-dark dark:text-foreground-dark">
+      <div className="border-b border-border dark:border-border-dark p-6">
         <div className="flex items-center gap-4">
           <img
             src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop"
@@ -33,8 +33,10 @@ const TeacherProfileCard = () => {
             className="h-12 w-12 rounded-full object-cover"
           />
           <div>
-            <h3 className="font-medium text-foreground">Monica Howard</h3>
-            <p className="text-sm text-muted-foreground">Mathematics Teacher</p>
+            <h3 className="font-medium">Monica Howard</h3>
+            <p className="text-sm text-secondary dark:text-secondary-dark">
+              Mathematics Teacher
+            </p>
           </div>
         </div>
       </div>

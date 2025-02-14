@@ -89,7 +89,7 @@ const Profile = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="p-6 dark:bg-zinc-900"
+      className="p-6 dark:bg-zinc-900 h-full"
     >
       {/* Header */}
       <div className="mb-8">

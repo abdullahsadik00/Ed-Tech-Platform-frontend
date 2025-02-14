@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { AuthButton } from './AuthButton';
-import { VerificationModal } from './VerificationModal';
+import VerificationModal from './VerificationModal';
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isVerificationModalOpen, setIsVerificationModalOpen] = useState(true);
   const [activeView, setActiveView] = useState('onboard');
-
+  const handleVerification = (code) => {
+    console.log('Verification code:', code);
+    setIsVerificationModalOpen(false);
+  };
   return (
     <section className="min-h-screen w-full py-10 px-4">
       <div className="container max-w-4xl mx-auto">
@@ -110,9 +113,14 @@ const SignUp = () => {
         </div>
       </div>
 
-      <VerificationModal
+      {/* <VerificationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+      /> */}
+      <VerificationModal
+        isOpen={isVerificationModalOpen}
+        onClose={() => setIsVerificationModalOpen(false)}
+        onVerify={handleVerification}
       />
     </section>
   );

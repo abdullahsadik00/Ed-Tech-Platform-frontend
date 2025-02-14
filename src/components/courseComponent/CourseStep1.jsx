@@ -11,7 +11,12 @@ import {
   BookOpen,
 } from 'lucide-react';
 
-const CourseStep1 = ({ formData, setFormData }) => {
+const CourseStep1 = ({
+  formData,
+  setFormData,
+  currentStep,
+  setCurrentStep,
+}) => {
   const [showThumbnailImage, setShowThumbnailImage] = useState(true);
 
   const handleInputChange = (field, value) => {
@@ -147,7 +152,7 @@ const CourseStep1 = ({ formData, setFormData }) => {
 
             <div className="space-y-3 flex items-center">
               <label className="font-medium sm:w-56 w-72">Price</label>
-              <div className="flex w-full items-center gap-2 border border-border rounded-lg px-4 py-2 dark:bg-zinc-800 dark:text-zinc-200">
+              <div className="flex w-full items-center gap-2 border border-border rounded-lg px-4 py-2 dark:bg-zinc-800 dark:text-zinc-200 ">
                 <input
                   type="number"
                   value={formData.price}
@@ -175,7 +180,7 @@ const CourseStep1 = ({ formData, setFormData }) => {
                 <select
                   value={formData.level}
                   onChange={(e) => handleInputChange('level', e.target.value)}
-                  className="bg-transparent border-none focus:outline-none focus:ring-0 w-full rounded-lg dark:bg-zinc-800 dark:text-zinc-200"
+                  className="bg-transparent border-none focus:outline-none focus:ring-2 focus:ring-primary w-full rounded-lg dark:bg-zinc-800 dark:text-zinc-200 border border-border focus:border-primary transition-colors"
                 >
                   {levels.map((l) => (
                     <option key={l} value={l}>
@@ -194,7 +199,7 @@ const CourseStep1 = ({ formData, setFormData }) => {
                   onChange={(e) =>
                     handleInputChange('language', e.target.value)
                   }
-                  className="bg-transparent border-none focus:outline-none focus:ring-0 w-full rounded-lg dark:bg-zinc-800 dark:text-zinc-200"
+                  className="bg-transparent border-none focus:outline-none focus:ring-2 focus:ring-primary w-full rounded-lg dark:bg-zinc-800 dark:text-zinc-200 border border-border focus:border-primary transition-colors"
                 >
                   {languages.map((l) => (
                     <option key={l} value={l}>
@@ -206,7 +211,7 @@ const CourseStep1 = ({ formData, setFormData }) => {
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-center">
-              <label className="font-medium w-full sm:w-56 mb-2 sm:mb-0">
+              <label className="font-medium w-full sm:w-56 mb-2 sm:mb-0 dark:text-slate-300">
                 Description
               </label>
               <textarea

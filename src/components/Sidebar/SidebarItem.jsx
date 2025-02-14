@@ -1,5 +1,3 @@
-import React from 'react';
-
 const SidebarItem = ({ item, index, isCollapsed, activeIndex, onClick }) => {
   const Icon = item.icon;
 
@@ -12,15 +10,15 @@ const SidebarItem = ({ item, index, isCollapsed, activeIndex, onClick }) => {
           transition-all duration-200 group
           ${
             activeIndex === index
-              ? 'bg-primary-400 dark:bg-primary-300 text-white'
-              : 'text-gray-700 hover:bg-gray-100'
+              ? 'bg-primary-500 text-white'
+              : 'text-foreground hover:bg-primary-100'
           }
         `}
       >
         <Icon
           className={`
           w-5 h-5 
-          ${activeIndex === index ? 'text-white' : 'text-gray-600'}
+          ${activeIndex === index ? 'text-white' : 'text-primary-500'}
           ${!isCollapsed && 'mr-3'}
         `}
         />

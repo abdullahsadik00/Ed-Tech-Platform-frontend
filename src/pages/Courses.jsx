@@ -66,7 +66,7 @@ const Courses = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary-50 to-primary-200 dark:from-zinc-950 dark:to-zinc-700 pb-20">
+    <div className="min-h-screen bg-gradient-to-l from-primary-light to-primary-lightest dark:from-zinc-950 dark:to-zinc-700 pb-20">
       <CourseHeader
         currentStep={currentStep}
         totalSteps={3}
@@ -75,7 +75,12 @@ const Courses = () => {
       />
 
       {currentStep === 1 && (
-        <CourseStep1 formData={formData} setFormData={setFormData} />
+        <CourseStep1
+          formData={formData}
+          setFormData={setFormData}
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+        />
       )}
       {currentStep === 2 && (
         <CourseStep2

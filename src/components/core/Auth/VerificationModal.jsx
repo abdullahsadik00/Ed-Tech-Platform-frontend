@@ -1,83 +1,86 @@
-import React, { useState } from 'react';
-import { AuthButton } from './AuthButton';
-
-export const VerificationModal = ({ isOpen, onClose }) => {
-  const [code, setCode] = useState(['', '', '', '', '', '']);
-
-  const handleCodeChange = (index, value) => {
-    if (value.length <= 1) {
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { Modal, Button, TextInput, Text, Group } from '@mantine/core';
+import { motion, AnimatePresence } from 'framer-motion';
+const VerificationModal = ({ isOpen, onClose, onVerify }) => {
+  const [code, setCode] = useState(['', '', '', '', '']);
+  const handleInputChange = (index, value) => {
+    // TODO: Implement input validation and handle code change
+    if (code.length <= 1) {
       const newCode = [...code];
       newCode[index] = value;
       setCode(newCode);
 
-      // Auto-focus next input
       if (value && index < 5) {
         const nextInput = document.getElementById(`code-${index + 1}`);
         nextInput?.focus();
       }
     }
   };
-
-  if (!isOpen) return null;
-
+  const handleKeyDown = (index, event) => {
+    if (event.key === 'Backspace' && code[index] === '') {
+      const prevInput = document.getElementById(`code-${index - 1}`);
+      prevInput?.focus();
+    }
+  };
+  const handleVerify = () => {
+    if (code.length === 6) {
+      onVerify(verificationCode);
+      const verificationCode = code.join('');
+      onClose();
+    }
+  };
+  useEffect(() => {
+    if (isOpen) {
+      // TODO:WWhenever the modal is opened set code to empty
+      setTimeout(() => document.getElementById('code-0')?.focus(), 100);
+    }
+  }, [isOpen]);
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/50" onClick={onClose} />
-      <div className="relative bg-white rounded-lg w-full max-w-md mx-4 p-6">
-        <div className="flex justify-end">
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
+    <Modal opened={isOpen} onClose={onClose} title="Verification" centered>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ x: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 300 }}
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-
-        <h3 className="font-semibold text-2xl text-center tracking-wide mb-2">
-          Almost done
-        </h3>
-        <p className="text-sm text-center text-gray-600 mb-6">
-          Please type the code we sent to your email
-        </p>
-
-        <div className="flex justify-center gap-2 mb-6">
-          {code.map((digit, index) => (
-            <input
-              key={index}
-              id={`code-${index}`}
-              type="text"
-              maxLength={1}
-              value={digit}
-              onChange={(e) => handleCodeChange(index, e.target.value)}
-              className="w-12 h-12 text-center border rounded-lg focus:ring-2 focus:ring-[#3C43C1]/50 text-lg font-semibold"
-            />
-          ))}
-        </div>
-
-        <AuthButton onClick={onClose}>Verify</AuthButton>
-
-        <div className="text-center">
-          <p className="text-sm font-medium mb-2">51:12</p>
-          <p className="text-sm text-gray-600">
-            Can't access your email?{' '}
-            <button className="font-semibold text-gray-900 hover:underline">
-              Contact support
-            </button>
-          </p>
-        </div>
-      </div>
-    </div>
+            <Text mb="md" align="center">
+              Please enter the verification code sent to your email
+            </Text>
+            <Group grow mb="md">
+              {code.map((digit, index) => (
+                <TextInput
+                  key={index}
+                  id={`code-${index}`}
+                  type="tel"
+                  maxLength={1}
+                  value={digit}
+                  onChange={(e) => handleInputChange(index, e.target.value)}
+                  onKeyDown={(e) => handleKeyDown(index, e)}
+                  // focusBorderColor="primary"
+                  className="w-[60px] h-[40px] rounded-md text-center"
+                  style={{ width: '3rem' }}
+                  styles={{ input: { textAlign: 'center' } }}
+                />
+              ))}
+            </Group>
+            <Button fullWidth onClick={handleVerify}>
+              Verify
+            </Button>
+            <Text align="center" size="sm" mt="md">
+              {' '}
+              Can't access your email?{' '}
+              <Text component="a" href="#" variant="link">
+                Contact support
+              </Text>
+            </Text>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      VerificationModal
+    </Modal>
   );
 };
+export default VerificationModal;
