@@ -1,9 +1,11 @@
 'use client';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { Navbar } from '@/components/core/Navbar';
 import { useAuth } from '@/hooks/use-auth';
+import { Sidebar } from './Sidebar';
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const { user } = useAuth();
 
     if (!user) {
@@ -11,9 +13,25 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     }
 
     return (
-        <div>
-            <Navbar />
-            <main className="container mx-auto p-4">{children}</main>
+        <div className="min-h-screen bg-gray-50">
+            <Sidebar
+                role={user.role}
+                isOpen={isSidebarOpen}
+                onClose={() => setIsSidebarOpen(false)}
+            />
+
+            <div className="lg:pl-72">
+                {/* <Navbar
+                    role={user.role}
+                    onMenuClick={() => setIsSidebarOpen(true)}
+                /> */}
+
+                <main className="p-6">
+                    <div className="max-w-7xl mx-auto">
+                        {children}
+                    </div>
+                </main>
+            </div>
         </div>
     );
 }

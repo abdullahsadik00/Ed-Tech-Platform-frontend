@@ -10,11 +10,20 @@ export function useAuth() {
     setUser(data.user);
   };
 
+  const checkSession = async () => {
+    try {
+      const { data } = await api.get('/auth/me');
+      setUser(data);
+    } catch (error) {
+      setUser(null);
+    }
+  };
+
   const logout = async () => {
     await api.post('/auth/logout');
     setUser(null);
   };
 
-  return { user, login, logout };
+  return { user, login, logout, loading: false, checkSession }; // TODO
   // return { user };
 }

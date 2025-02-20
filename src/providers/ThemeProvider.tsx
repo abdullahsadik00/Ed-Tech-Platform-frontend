@@ -3,6 +3,7 @@
 
 import { MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
+import '@mantine/core/styles.css'; // Add this import
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return (

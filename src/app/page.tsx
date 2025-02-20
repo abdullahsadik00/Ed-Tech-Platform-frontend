@@ -1,3 +1,5 @@
+import '@mantine/core/styles.css';
+
 import { Button } from '@mantine/core';
 import Link from 'next/link';
 

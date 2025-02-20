@@ -1,0 +1,21 @@
+/* src/styles/auth.css */
+.auth-container {
+  @apply min-h-screen flex items-center justify-center;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.auth-card {
+  @apply w-full max-w-md bg-white rounded-2xl shadow-xl p-8;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
