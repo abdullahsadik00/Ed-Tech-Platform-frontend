@@ -8,7 +8,19 @@
   @apply w-full max-w-md bg-white rounded-2xl shadow-xl p-8;
   animation: slideUp 0.5s ease-out;
 }
+.divider {
+  @apply flex items-center text-sm text-slate-500 my-6;
+}
 
+.divider::before,
+.divider::after {
+  content: '';
+  @apply flex-1 border-t border-slate-200;
+}
+
+.divider span {
+  @apply px-3;
+}
 @keyframes slideUp {
   from {
     transform: translateY(20px);

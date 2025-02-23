@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Button } from "@mantine/core";
+// import { Button } from "@mantine/core";
 import { TextInput, PasswordInput } from "@mantine/core";
 // import { FaGoogle } from "react-icons/fa";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { Role } from "@/types/user";
+import { Button } from "../ui";
 // import type { UserRole } from "@/pages/Index";
 
 interface SignInProps {
@@ -20,7 +21,6 @@ export const SignIn = ({ onToggle, role }: SignInProps) => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
-
         try {
             // Simulate API call
             await new Promise((resolve) => setTimeout(resolve, 1500));
@@ -40,10 +40,10 @@ export const SignIn = ({ onToggle, role }: SignInProps) => {
     };
 
     return (
-        <div className="space-y-6 fade-in">
+        <div className="space-y-2 fade-in">
             <div>
-                <h1 className="auth-title">Welcome back</h1>
-                <p className="auth-subtitle">
+                <h1 className="text-2xl font-semibold font-sans text-slate-900 text-center mb-2">Welcome back</h1>
+                <p className="text-2xl font-semibold text-slate-900 text-center mb-2">
                     Sign in to your {role} account
                 </p>
             </div>
@@ -52,12 +52,13 @@ export const SignIn = ({ onToggle, role }: SignInProps) => {
                 {/* <FaGoogle className="w-5 h-5" /> */}
                 <span>Continue with Google</span>
             </button>
+            {/* <Button variant="secondary"> Google</Button> */}
 
             <div className="divider">
                 <span>or continue with email</span>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-2">
                 <div className="space-y-2">
                     <TextInput
                         label="Email"
@@ -83,15 +84,15 @@ export const SignIn = ({ onToggle, role }: SignInProps) => {
                         placeholder="••••••••"
                         required
                         className="w-full"
-                        rightSection={
-                            <button
-                                type="button"
-                                className="text-gray-500 hover:text-gray-700"
-                                onClick={() => setShowPassword(!showPassword)}
-                            >
-                                {showPassword ? "Hide" : "Show"}
-                            </button>
-                        }
+                    // rightSection={
+                    //     <button
+                    //         type="button"
+                    //         className="text-gray-500 hover:text-gray-700"
+                    //         onClick={() => setShowPassword(!showPassword)}
+                    //     >
+                    //         {showPassword ? "Hide" : "Show"}
+                    //     </button>
+                    // }
                     />
                 </div>
 
@@ -116,7 +117,7 @@ export const SignIn = ({ onToggle, role }: SignInProps) => {
                 </div>
 
                 <Button
-                    type="submit"
+                    variant="primary"
                     className={cn(
                         "w-full",
                         isLoading && "animate-pulse cursor-not-allowed"

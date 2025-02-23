@@ -1,7 +1,8 @@
-import { Card, Grid } from "@mantine/core";
+import { Card } from "@mantine/core";
 import RoleSelector from "./RoleSelector";
 import { SignIn } from "./SignIn";
 import { SignUp } from "./SignUp";
+import { useState } from "react";
 
 // Define the types for role images, descriptions, and quotes
 interface RoleContent {
@@ -16,24 +17,18 @@ interface AuthColumnProps {
     setSelectedRole: (role: keyof RoleContent) => void;
     isSignIn: boolean;
     setIsSignIn: (isSignIn: boolean) => void;
-    roleImages: RoleContent;
-    roleDescriptions: RoleContent;
-    roleQuotes: RoleContent;
 }
 
 export default function AuthColumn({
     selectedRole,
     setSelectedRole,
     isSignIn,
-    setIsSignIn,
-    roleImages,
-    roleDescriptions,
-    roleQuotes,
+    setIsSignIn
 }: AuthColumnProps) {
+    const [isDisabled, setIsDisabled] = useState(false)
     return (
-        <Grid.Col span={{ base: 12, md: 6, lg: 5 }} className="relative">
-            <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 to-white/40 z-0"></div>
-            <div className="relative h-full p-6 lg:p-12 flex flex-col justify-center">
+        <div className="relative w-full authColumn">
+            <div className="relative p-6 lg:p-2 flex flex-col justify-center h-4/5">
                 <Card
                     shadow="xl"
                     padding="xl"
@@ -41,9 +36,9 @@ export default function AuthColumn({
                     className="backdrop-blur-sm bg-white/80 border-white/20"
                 >
                     {/* Role Selector */}
-                    <RoleSelector selectedRole={selectedRole} setSelectedRole={setSelectedRole} />
+                    <RoleSelector selectedRole={selectedRole} setSelectedRole={setSelectedRole} isDisabled={isDisabled} />
                     {/* Auth Forms */}
-                    <div className="fade-in mt-6">
+                    <div className="fade-in">
                         {isSignIn ? (
                             <SignIn
                                 onToggle={() => setIsSignIn(false)}
@@ -53,11 +48,13 @@ export default function AuthColumn({
                             <SignUp
                                 onToggle={() => setIsSignIn(true)}
                                 role={selectedRole}
+                                onRoleChange={setSelectedRole} // Pass the onRoleChange prop
+                                setIsDisabled={setIsDisabled}
                             />
                         )}
                     </div>
                 </Card>
             </div>
-        </Grid.Col>
+        </div>
     );
 }
