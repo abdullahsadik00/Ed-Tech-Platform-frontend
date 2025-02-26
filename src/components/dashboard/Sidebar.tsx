@@ -1,71 +1,66 @@
 'use client';
-import { cn } from '@/lib/utils';
-import { Role } from '@/types/user';
+import React from 'react';
+import { 
+  AppShell,
+  NavLink,
+  Text,
+  useMantineTheme,
+  Stack
+} from '@mantine/core';
+import { 
+  Home, 
+  Users, 
+  BookOpen, 
+  Calendar, 
+  Settings,
+  GraduationCap,
+  UserCheck,
+  FileText
+} from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
+const menuItems = [
+  { icon: Home, label: 'Dashboard', href: '/dashboard' },
+  { icon: Users, label: 'Users', href: '/dashboard/users' },
+  { icon: BookOpen, label: 'Courses', href: '/dashboard/courses' },
+  { icon: Calendar, label: 'Schedule', href: '/dashboard/schedule' },
+  { icon: FileText, label: 'Assignments', href: '/dashboard/assignments' },
+  { icon: Settings, label: 'Settings', href: '/dashboard/settings' },
+];
 
-type SidebarProps = {
-    role: Role,
-    isOpen: boolean,
-    onClose: () => void,
-}
+export default function Sidebar() {
+  const theme = useMantineTheme();
+  const pathname = usePathname();
 
-export function Sidebar({ role, isOpen, onClose }: SidebarProps) {
-    const getLinks = () => {
-        const baseLinks = [{ name: 'Dashboard', href: '/dashboard', icon: '🏠' },
-        ]
+  return (
+    <AppShell.Navbar p="xs" style={{ width: 250 }}>
+      <AppShell.Section mt="xs">
+        <Text 
+          ta="center" 
+          size="xl" 
+          fw={700} 
+          color={theme.primaryColor}
+        >
+          EdTech Platform
+        </Text>
+      </AppShell.Section>
 
-        switch (role) {
-            case 'student':
-                return [...baseLinks,
-                { name: 'My Classes', href: '/student/classes', icon: '🎒' },
-                { name: 'Grades', href: '/student/grades', icon: '📈' },
-                { name: 'Resources', href: '/student/resources', icon: '📁' }
-                ]
-            case 'teacher':
-                return [...baseLinks,
-                { name: 'My Courses', href: '/teacher/courses', icon: '📚' },
-                { name: 'Gradebook', href: '/teacher/gradebook', icon: '📝' },
-                { name: 'Schedule', href: '/teacher/schedule', icon: '🗓️' }
-                ]
-            case 'parent':
-                return [...baseLinks,
-                { name: 'Children', href: '/parent/children', icon: '👨👧' },
-                { name: 'Progress', href: '/parent/progress', icon: '📊' },
-                { name: 'Attendance', href: '/parent/attendance', icon: '✅' }
-                ]
-            case 'admin':
-                return [...baseLinks,
-                { name: 'Users', href: '/admin/users', icon: '👥' },
-                { name: 'Analytics', href: '/admin/analytics', icon: '📊' },
-                { name: 'Settings', href: '/admin/settings', icon: '⚙️' }
-                ]
-            default:
-                return baseLinks
-        }
-    }
-    return (<aside className={cn(
-        "fixed inset-y-0 left-0 z-40 w-72 bg-white border-r transition-transform",
-        "transform lg:translate-x-0",
-        isOpen ? 'translate-x-0' : '-translate-x-full'
-    )}>
-        <nav className="h-full flex flex-col">
-            <div className="p-4 border-b">
-                <h2 className="text-xl font-bold">
-                    {role?.toUpperCase()} DASHBOARD
-                </h2>
-            </div>
-            <div className="flex-1 overflow-y-auto p-4">
-                {getLinks().map((link) => (
-                    <a
-                        key={link.href}
-                        href={link.href}
-                        className="flex items-center p-3 rounded-lg hover:bg-gray-100 mb-2"
-                    >
-                        <span className="mr-3 text-xl">{link.icon}</span>
-                        {link.name}
-                    </a>
-                ))}
-            </div>
-        </nav>
-    </aside>)
+      <AppShell.Section grow mt="md">
+        <Stack gap="xs">
+          {menuItems.map((item) => (
+            <NavLink
+              key={item.href}
+              component={Link}
+              href={item.href}
+              label={item.label}
+              leftSection={<item.icon size={20} />}
+              active={pathname === item.href}
+              variant="filled"
+            />
+          ))}
+        </Stack>
+      </AppShell.Section>
+    </AppShell.Navbar>
+  );
 }

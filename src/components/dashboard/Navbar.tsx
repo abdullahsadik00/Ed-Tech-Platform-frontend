@@ -1,33 +1,38 @@
 // components/dashboard/Navbar.tsx
 'use client';
-import { cn } from '@/lib/utils';
-import { useDashboard } from './context';
+import React from 'react';
+import { 
+  AppShell, 
+  TextInput, 
+  ActionIcon, 
+  Group, 
+  useMantineTheme,
+  Container
+} from '@mantine/core';
+import { Bell, Search, User } from 'lucide-react';
 
-export function Navbar() {
-    const { state, actions } = useDashboard();
+export default function Navbar() {
+  const theme = useMantineTheme();
 
-    return (
-        <header className={cn(
-            "sticky top-0 z-40 flex h-16 items-center justify-between px-6",
-            "bg-background border-b",
-            "supports-backdrop-blur:bg-background/60 backdrop-blur"
-        )}>
-            <div className="flex items-center gap-4">
-                <button
-                    onClick={actions.toggleSidebar}
-                    className="hover:bg-accent p-2 rounded-lg"
-                >
-                    {/* Add your MenuIcon component here */}
-                    <span className="text-2xl">☰</span>
-                </button>
-                <h1 className="text-xl font-semibold">
-                    {state.role.charAt(0).toUpperCase() + state.role.slice(1)} Dashboard
-                </h1>
-            </div>
-
-            <div className="flex items-center gap-4">
-                {/* Add your other components here */}
-            </div>
-        </header>
-    );
+  return (
+    <AppShell.Header style={{ width: 60 }}    p="xs">
+      <Container fluid>
+        <Group justify="space-between">
+          <TextInput
+            placeholder="Search"
+            leftSection={<Search size={16} />}
+            style={{ width: '300px' }}
+          />
+          <Group>
+            <ActionIcon variant="subtle" color="gray">
+              <Bell size={20} />
+            </ActionIcon>
+            <ActionIcon variant="subtle" color="gray">
+              <User size={20} />
+            </ActionIcon>
+          </Group>
+        </Group>
+      </Container>
+    </AppShell.Header>
+  );
 }

@@ -12,6 +12,7 @@ export default function Home() {
       <div className="flex gap-4">
         <Button component={Link} href="/auth">Login</Button>
         <Button component={Link} href="/auth/register">Register</Button>
+        <Button component={Link} href="/dashboard">DAsh</Button>
       </div>
     </div>
   );
