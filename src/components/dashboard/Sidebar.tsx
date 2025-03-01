@@ -1,13 +1,6 @@
 'use client';
 import React from 'react';
 import { 
-  AppShell,
-  NavLink,
-  Text,
-  useMantineTheme,
-  Stack
-} from '@mantine/core';
-import { 
   Home, 
   Users, 
   BookOpen, 
@@ -30,37 +23,35 @@ const menuItems = [
 ];
 
 export default function Sidebar() {
-  const theme = useMantineTheme();
   const pathname = usePathname();
 
   return (
-    <AppShell.Navbar p="xs" style={{ width: 250 }}>
-      <AppShell.Section mt="xs">
-        <Text 
-          ta="center" 
-          size="xl" 
-          fw={700} 
-          color={theme.primaryColor}
-        >
+    <nav className="fixed top-0 left-0 h-screen w-64 bg-white border-r border-gray-200 flex flex-col">
+      <div className="px-6 py-4 border-b border-gray-200">
+        <h1 className="text-xl font-bold text-center text-purple-600">
           EdTech Platform
-        </Text>
-      </AppShell.Section>
+        </h1>
+      </div>
 
-      <AppShell.Section grow mt="md">
-        <Stack gap="xs">
+      <div className="flex-1 overflow-y-auto px-3 py-4">
+        <ul className="space-y-1">
           {menuItems.map((item) => (
-            <NavLink
-              key={item.href}
-              component={Link}
-              href={item.href}
-              label={item.label}
-              leftSection={<item.icon size={20} />}
-              active={pathname === item.href}
-              variant="filled"
-            />
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className={`flex items-center p-3 rounded-lg transition-colors duration-200
+                  ${pathname === item.href
+                    ? 'bg-purple-50 text-purple-700 font-medium'
+                    : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                  }`}
+              >
+                <item.icon className="w-5 h-5 mr-3" />
+                <span>{item.label}</span>
+              </Link>
+            </li>
           ))}
-        </Stack>
-      </AppShell.Section>
-    </AppShell.Navbar>
+        </ul>
+      </div>
+    </nav>
   );
 }
