@@ -1,0 +1,191 @@
+@import 'tailwindcss';
+@layer theme, base, components, utilities;
+
+@layer base {
+  :root {
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5% 64.9%;
+    --radius: 0.5rem;
+
+    /* EdTech-specific colors */
+    --student: 221.2 83.2% 53.3%;
+    --teacher: 262.1 83.3% 57.8%;
+    --parent: 346.8 77.2% 49.8%;
+    --lesson-complete: 142.1 76.2% 36.3%;
+    --lesson-incomplete: 24.6 95% 53.1%;
+    --quiz-score: 41.9 95.9% 50.4%;
+  }
+
+  .dark {
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Typography */
+  h1 {
+    scroll-margin-top: 5rem;
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+
+  h2 {
+    scroll-margin-top: 5rem;
+    font-size: 1.875rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  h3 {
+    scroll-margin-top: 5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  p {
+    line-height: 1.75;
+  }
+}
+@layer components {
+  /* Custom utilities */
+  .scrollbar-education {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) hsl(var(--background));
+  }
+
+  .scrollbar-education::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  .scrollbar-education::-webkit-scrollbar-track {
+    background-color: hsl(var(--background));
+  }
+
+  .scrollbar-education::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    background-color: hsl(var(--border));
+  }
+
+  .scrollbar-education::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--muted-foreground) / 0.3);
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* Role badges */
+/* .student-badge {
+    @apply bg-student/10 text-student border-student/20;
+  }
+  .teacher-badge {
+    @apply bg-teacher/10 text-teacher border-teacher/20;
+  }
+  .parent-badge {
+    @apply bg-parent/10 text-parent border-parent/20;
+  } */
+/* Role badges */
+/* .student-badge {
+  @apply bg-student/10 text-student border-student/20;
+}
+.teacher-badge {
+  @apply bg-teacher/10 text-teacher border-teacher/20;
+}
+.parent-badge {
+  @apply bg-parent/10 text-parent border-parent/20;
+} */
+
+@layer utilities {
+  /* Custom scrollbar */
+  .scrollbar-education {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) hsl(var(--background));
+  }
+  .scrollbar-education::-webkit-scrollbar {
+    width: 2px;
+  }
+  /* .scrollbar-education::-webkit-scrollbar-track {
+    @apply bg-background;
+  } */
+  /* .scrollbar-education::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-border hover:bg-muted-foreground/30;
+  } */
+
+  /* Animation utilities */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  /* @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  } */
+
+  /* Lesson progress indicators */
+  /* .lesson-complete {
+    @apply bg-lesson-complete/10 text-lesson-complete border-lesson-complete/20;
+  }
+  .lesson-incomplete {
+    @apply bg-lesson-incomplete/10 text-lesson-incomplete border-lesson-incomplete/20;
+  } */
+}
