@@ -18,15 +18,13 @@ export function Overview() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold">Home Screen</h1>
-
       <BentoGrid className="max-w-6xl mx-auto">
         {/* Upcoming Deadlines */}
         <BentoGridItem
-          title="Upcoming Deadlines"
+          title="Upcoming Deadlinessdsd"
           header={<Clock className="h-5 w-5" />}
           className="md:col-span-2"
-        >
+        > Upcpmming deadlinesw3232
           <div className="grid gap-4">
             {deadlines.map((item, index) => (
               <Card key={index} className={item.priority === "high" ? "border-red-200" : "border-yellow-200"}>
