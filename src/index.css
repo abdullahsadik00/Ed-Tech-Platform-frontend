@@ -95,6 +95,34 @@
   p {
     line-height: 1.75;
   }
+
+  /* new css */
+  /* Add to your global styles */
+.rdp {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.rdp-table {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.rdp-head {
+  display: flex !important;
+}
+
+.rdp-head_row {
+  display: flex !important;
+  width: 100% !important;
+}
+
+.rdp-head_cell {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 1 !important;
+}
 }
 @layer components {
   /* Custom utilities */

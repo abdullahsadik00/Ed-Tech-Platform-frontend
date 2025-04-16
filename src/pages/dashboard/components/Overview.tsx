@@ -4,8 +4,12 @@ import { Bell, Clock, AlertTriangle, BookOpen, BellIcon, SettingsIcon } from "lu
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 import { Button } from "@/components/ui/button"
+import { useState } from "react"
+import { Calendar } from "@/components/ui/calendar"
 
 export function Overview() {
+  const [date, setDate] = useState<Date | undefined>(new Date())
+
   const deadlines = [
     { title: "Math Assignment", due: "Tomorrow", priority: "high" },
     { title: "Science Project", due: "3 days", priority: "medium" }
@@ -75,15 +79,24 @@ export function Overview() {
         {/* Recent Announcements */}
         <BentoGridItem
           title="Announcements"
-          header={<Bell className="h-5 w-5" />}
-        >
-          <div className="space-y-3">
+          // header={<Bell className="h-5 w-5" />}
+        className="">
+          <div className="">
+
+          <Calendar
+          
+    mode="single"
+    selected={date}
+    onSelect={setDate}
+    className="rounded-md border "
+  /></div>
+          {/* <div className="space-y-3">
             {announcements.map((item, index) => (
               <Alert key={index} variant="default">
                 <AlertDescription>{item}</AlertDescription>
               </Alert>
             ))}
-          </div>
+          </div> */}
         </BentoGridItem>
 
         {/* System Alerts */}
