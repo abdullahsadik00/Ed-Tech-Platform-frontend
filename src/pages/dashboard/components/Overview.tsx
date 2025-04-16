@@ -1,7 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Bell, Clock, AlertTriangle, BookOpen } from "lucide-react"
+import { Bell, Clock, AlertTriangle, BookOpen, BellIcon, SettingsIcon } from "lucide-react"
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
+import { Button } from "@/components/ui/button"
 
 export function Overview() {
   const deadlines = [
@@ -16,6 +18,14 @@ export function Overview() {
 
   const recommendations = ["Physics 101", "Computer Science Basics"]
 
+  const user = 
+    {
+      imageUrl : "",
+      gradeLevel : '',name:'',program:"",initials:""
+    }
+  
+  
+
   return (
     <div className="space-y-6">
       <BentoGrid className="max-w-6xl mx-auto">
@@ -26,7 +36,7 @@ export function Overview() {
           className="md:col-span-2"
         > Upcpmming deadlinesw3232
           <div className="grid gap-4">
-            {deadlines.map((item, index) => (
+            {/* {deadlines.map((item, index) => (
               <Card key={index} className={item.priority === "high" ? "border-red-200" : "border-yellow-200"}>
                 <CardHeader className="flex flex-row items-center justify-between">
                   <CardTitle>{item.title}</CardTitle>
@@ -40,7 +50,25 @@ export function Overview() {
                   <p>Due: {item.due}</p>
                 </CardContent>
               </Card>
-            ))}
+            ))} */}
+            <Card className="p-6 flex items-center gap-4">
+  <Avatar>
+    <AvatarImage src={user.imageUrl} />
+    <AvatarFallback>{user.initials}</AvatarFallback>
+  </Avatar>
+  <div>
+    <CardTitle>{user.name}</CardTitle>
+    <CardDescription>{user.program} • {user.gradeLevel}</CardDescription>
+    <div className="flex gap-2 mt-2">
+      <Button variant="outline" size="sm">
+        <BellIcon className="w-4 h-4 mr-1" /> Notifications
+      </Button>
+      <Button variant="outline" size="sm">
+        <SettingsIcon className="w-4 h-4 mr-1" /> Settings
+      </Button>
+    </div>
+  </div>
+</Card>
           </div>
         </BentoGridItem>
 
