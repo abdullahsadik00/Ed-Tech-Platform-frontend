@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Bell, Clock, AlertTriangle, BookOpen, BellIcon, SettingsIcon } from "lucide-react"
+import { Clock, AlertTriangle, BookOpen, BellIcon, SettingsIcon } from "lucide-react"
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 import { Button } from "@/components/ui/button"
@@ -22,13 +22,13 @@ export function Overview() {
 
   const recommendations = ["Physics 101", "Computer Science Basics"]
 
-  const user = 
-    {
-      imageUrl : "",
-      gradeLevel : '',name:'',program:"",initials:""
-    }
-  
-  
+  const user =
+  {
+    imageUrl: "",
+    gradeLevel: '', name: '', program: "", initials: ""
+  }
+
+
 
   return (
     <div className="space-y-6">
@@ -56,40 +56,38 @@ export function Overview() {
               </Card>
             ))} */}
             <Card className="p-6 flex items-center gap-4">
-  <Avatar>
-    <AvatarImage src={user.imageUrl} />
-    <AvatarFallback>{user.initials}</AvatarFallback>
-  </Avatar>
-  <div>
-    <CardTitle>{user.name}</CardTitle>
-    <CardDescription>{user.program} • {user.gradeLevel}</CardDescription>
-    <div className="flex gap-2 mt-2">
-      <Button variant="outline" size="sm">
-        <BellIcon className="w-4 h-4 mr-1" /> Notifications
-      </Button>
-      <Button variant="outline" size="sm">
-        <SettingsIcon className="w-4 h-4 mr-1" /> Settings
-      </Button>
-    </div>
-  </div>
-</Card>
+              <Avatar>
+                <AvatarImage src={user.imageUrl} />
+                <AvatarFallback>{user.initials}</AvatarFallback>
+              </Avatar>
+              <div>
+                <CardTitle>{user.name}</CardTitle>
+                <CardDescription>{user.program} • {user.gradeLevel}</CardDescription>
+                <div className="flex gap-2 mt-2">
+                  <Button variant="outline" size="sm">
+                    <BellIcon className="w-4 h-4 mr-1" /> Notifications
+                  </Button>
+                  <Button variant="outline" size="sm">
+                    <SettingsIcon className="w-4 h-4 mr-1" /> Settings
+                  </Button>
+                </div>
+              </div>
+            </Card>
           </div>
         </BentoGridItem>
 
         {/* Recent Announcements */}
         <BentoGridItem
-          title="Announcements"
+          title=""
           // header={<Bell className="h-5 w-5" />}
-        className="">
+          className="p-0 bg-amber-100/10">
           <div className="">
-
-          <Calendar
-          
-    mode="single"
-    selected={date}
-    onSelect={setDate}
-    className="rounded-md border "
-  /></div>
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              className="rounded-md"
+            /></div>
           {/* <div className="space-y-3">
             {announcements.map((item, index) => (
               <Alert key={index} variant="default">
