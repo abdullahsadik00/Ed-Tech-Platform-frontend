@@ -3,6 +3,13 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Clock, AlertTriangle, BookOpen, BellIcon, SettingsIcon, Users } from "lucide-react"
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import {
   Table,
   TableBody,
   TableCaption,
@@ -154,6 +161,40 @@ export function Overview() {
 </CardContent>
 </Card>
 
+{/* chat card */}
+<div className="max-w-6xl mx-auto ">
+      <div className="flex gap-4">
+
+      <Card className="w-[71%]">
+        <CardHeader>
+          <CardTitle>All Chats</CardTitle>
+        </CardHeader>
+        <CardContent>
+
+        <Card>
+          <CardContent className="flex justify-between">
+            <div className="flex items-center justify-between gap-2">
+              <div>
+                <Avatar className="w-12 h-12">
+                <AvatarImage src="https://pinnacle.works/wp-content/uploads/2022/06/dummy-image.jpg" className="w-12 h-12"/>
+                <AvatarFallback>{user.initials}</AvatarFallback>
+              </Avatar>
+              </div>
+              <p className="pl-2">Sadik Shaikh</p>
+            </div>
+            <div>View</div>
+          </CardContent>
+        </Card>
+        </CardContent>
+      </Card>
+      <Card className="w-[35%]">
+      <CardContent>
+
+Card
+</CardContent>
+      </Card>
+      </div>
+</div>
       <BentoGrid className="max-w-6xl mx-auto">
         {/* Upcoming Deadlines */}
         <BentoGridItem
