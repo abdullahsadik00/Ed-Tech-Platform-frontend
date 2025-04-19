@@ -1,7 +1,17 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Clock, AlertTriangle, BookOpen, BellIcon, SettingsIcon } from "lucide-react"
+import { Clock, AlertTriangle, BookOpen, BellIcon, SettingsIcon, Users } from "lucide-react"
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
@@ -10,6 +20,54 @@ import { Calendar } from "@/components/ui/calendar"
 export function Overview() {
   const [date, setDate] = useState<Date | undefined>(new Date())
 
+  const examSchedule = [
+    {
+      subject: "Mathematics",
+      date: "2025-05-03",
+      time: "10:00 AM",
+      duration: "2 hours",
+      location: "Room 204, Building A",
+      notes: "Bring calculator and geometry set.",
+      status:"completed"
+    },
+    {
+      subject: "Physics",
+      date: "2025-05-05",
+      time: "1:00 PM",
+      duration: "3 hours",
+      location: "Lab 3, Science Block",
+      notes: "Lab coat required.",
+      status:"ongoing"
+    },
+    {
+      subject: "English Literature",
+      date: "2025-05-07",
+      time: "9:00 AM",
+      duration: "2.5 hours",
+      location: "Main Hall",
+      notes: "Essay-based questions. No electronic devices allowed.",
+      status:"completed"
+    },
+    {
+      subject: "Computer Science",
+      date: "2025-05-09",
+      time: "11:30 AM",
+      duration: "2 hours",
+      location: "Computer Lab 1",
+      notes: "Practical + theory sections.",
+      status:"completed"
+    },
+    {
+      subject: "History",
+      date: "2025-05-11",
+      time: "8:00 AM",
+      duration: "3 hours",
+      location: "Room 101, Humanities Wing",
+      notes: "Open book exam. Bring all course materials.",
+      status:"completed"
+    }
+  ]
+  
   const deadlines = [
     { title: "Math Assignment", due: "Tomorrow", priority: "high" },
     { title: "Science Project", due: "3 days", priority: "medium" }
@@ -32,6 +90,70 @@ export function Overview() {
 
   return (
     <div className="space-y-6">
+
+{/* Welcome card */}
+<div className="max-w-6xl mx-auto">
+<Card className="bg-blue-200/10 border-0">
+  <CardContent>
+    <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-primary-600 to-primary-500 dark:from-primary-700 dark:to-primary-900 dark:shadow-inner-lg">
+      <div className="flex items-center justify-between">
+        <div className="space-y-2">
+          <h2 className="text-xl font-semibold">
+            Welcome Back, Teacher!
+          </h2>
+          <p className="text-primary-100 ">
+            Your students are doing great!
+            <span className="mx-1 font-bold text-slate-900">60%</span>
+            have completed their exams.
+          </p>
+        </div>
+        <div className="hidden md:block">
+          <Users className="h-24 w-24 text-primary-200/50" />
+        </div>
+      </div>
+
+      {/* Decorative elements */}
+      <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-primary-400/20 " />
+      <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-primary-400/20 " />
+    </div>
+  </CardContent>
+</Card></div>
+
+{/* submitted test */}
+<Card className="max-w-6xl mx-auto"> 
+  <CardHeader className="font-semibold">Exam Schedule</CardHeader>
+  <CardContent>
+<Table>
+  {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
+  <TableHeader>
+    <TableRow>
+      <TableHead className="w-[100px]">No</TableHead>
+      <TableHead>Date</TableHead>
+      <TableHead>Time</TableHead>
+      <TableHead>Subject </TableHead>
+      <TableHead className="text-center">Status</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+      {examSchedule.map((examDetail,i)=>(
+    <TableRow>
+      <TableCell className="font-medium" key={i}>{i + 1}</TableCell>  
+      <TableCell className="font-medium">{examDetail.date}</TableCell>
+      <TableCell>{examDetail.time}</TableCell>
+      <TableCell>{examDetail.subject}</TableCell>
+      <TableCell className="text-center">{examDetail.status}</TableCell>
+      
+      {/* <TableCell className="font-medium">INV001</TableCell>
+      <TableCell>Paid</TableCell>
+      <TableCell>Credit Card</TableCell> */}
+      {/* <TableCell className="text-right">$250.00</TableCell> */}
+    </TableRow>
+      ))}
+  </TableBody>
+</Table>
+</CardContent>
+</Card>
+
       <BentoGrid className="max-w-6xl mx-auto">
         {/* Upcoming Deadlines */}
         <BentoGridItem
@@ -40,7 +162,7 @@ export function Overview() {
           className="md:col-span-2"
         > Upcpmming deadlinesw3232
           <div className="grid gap-4">
-            {/* {deadlines.map((item, index) => (
+            {deadlines.map((item, index) => (
               <Card key={index} className={item.priority === "high" ? "border-red-200" : "border-yellow-200"}>
                 <CardHeader className="flex flex-row items-center justify-between">
                   <CardTitle>{item.title}</CardTitle>
@@ -54,8 +176,8 @@ export function Overview() {
                   <p>Due: {item.due}</p>
                 </CardContent>
               </Card>
-            ))} */}
-            <Card className="p-6 flex items-center gap-4">
+            ))}
+            {/* <Card className="p-6 flex items-center gap-4">
               <Avatar>
                 <AvatarImage src={user.imageUrl} />
                 <AvatarFallback>{user.initials}</AvatarFallback>
@@ -72,7 +194,7 @@ export function Overview() {
                   </Button>
                 </div>
               </div>
-            </Card>
+            </Card> */}
           </div>
         </BentoGridItem>
 
@@ -118,6 +240,18 @@ export function Overview() {
           header={<BookOpen className="h-5 w-5" />}
           className="md:col-span-2"
         >
+          <div className="grid gap-4 md:grid-cols-2">
+            {recommendations.map((course, index) => (
+              <Card key={index}>
+                <CardHeader>
+                  <CardTitle>{course}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <button className="text-sm text-primary">View Details</button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
           <div className="grid gap-4 md:grid-cols-2">
             {recommendations.map((course, index) => (
               <Card key={index}>
