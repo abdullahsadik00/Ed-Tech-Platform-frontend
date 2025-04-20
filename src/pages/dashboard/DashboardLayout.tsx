@@ -48,7 +48,7 @@ const DashboardLayout = () => {
 
         <div className="flex flex-1 flex-col overflow-hidden">
           <Header />
-          <main className="flex-1 overflow-auto">
+          <main className="flex-1 overflow-auto bg-[#f6f6f6]">
             <div className="container mx-auto p-6">
               {renderComponent()}
             </div>
