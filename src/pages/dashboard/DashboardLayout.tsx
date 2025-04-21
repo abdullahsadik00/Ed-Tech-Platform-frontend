@@ -12,6 +12,7 @@ import { Overview } from '@/pages/dashboard/components/Overview';
 import { Courses } from '@/pages/dashboard/components/Courses';
 import { Assignments } from '@/pages/dashboard/components/Assignments';
 import { Schedule } from '@/pages/dashboard/components/Schedule';
+import Setting from './components/Setting';
 
 const DashboardLayout = () => {
   const [activeMenuIndex, setActiveMenuIndex] = useState(0);
@@ -26,6 +27,8 @@ const DashboardLayout = () => {
         return <Assignments />;
       case 3:
         return <Schedule />;
+        case 8:
+          return <Setting/>
       default:
         return <Overview />;
     }
