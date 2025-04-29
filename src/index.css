@@ -39,6 +39,17 @@
     --lesson-complete: 142.1 76.2% 36.3%;
     --lesson-incomplete: 24.6 95% 53.1%;
     --quiz-score: 41.9 95.9% 50.4%;
+
+    .no-visible-scrollbar {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .no-visible-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    
   }
 
   .dark {

@@ -102,7 +102,7 @@ export function Overview() {
 <div className="max-w-6xl mx-auto">
 <Card className="bg-blue-200/10 border-0">
   <CardContent>
-    <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-primary-600 to-primary-500 dark:from-primary-700 dark:to-primary-900 dark:shadow-inner-lg">
+    <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-primary-600 to-primary-500">
       <div className="flex items-center justify-between">
         <div className="space-y-2">
           <h2 className="text-xl font-semibold">
@@ -127,7 +127,7 @@ export function Overview() {
 </Card></div>
 
 {/* submitted test */}
-<Card className="max-w-6xl mx-auto"> 
+<Card className="max-w-6xl mx-auto bg-white"> 
   <CardHeader className="font-semibold">Exam Schedule</CardHeader>
   <CardContent>
 <Table>
@@ -264,7 +264,7 @@ Card
         <BentoGridItem
           title="System Status"
           header={<AlertTriangle className="h-5 w-5" />}
-          className="bg-red-50 dark:bg-red-900/20"
+          className="bg-red-50"
         >
           <Alert variant="destructive">
             <AlertTriangle className="h-4 w-4" />

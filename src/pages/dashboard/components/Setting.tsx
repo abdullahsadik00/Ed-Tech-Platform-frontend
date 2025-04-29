@@ -33,7 +33,7 @@ const Setting = () => {
         transition={{ delay: 0.2 }}
         className="max-w-7xl mx-auto bg-white rounded-md shadow-sm border border-gray-100  overflow-hidden"
       >
-        <div className="flex flex-col md:flex-row min-h-[600px] dark:bg-zinc-950">
+        <div className="flex flex-col md:flex-row min-h-[600px]">
           {/* Sidebar */}
           <div className="w-full md:w-64 border-b md:border-b-0 md:border-r border-gray-100 ">
             <nav className="p-4">
