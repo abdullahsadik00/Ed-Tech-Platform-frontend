@@ -13,11 +13,10 @@ import {
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
-import Image, { ImageProps } from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 
 interface CarouselProps {
-  items: JSX.Element[];
+  items: React.JSX.Element[];
   initialScroll?: number;
 }
 
@@ -32,7 +31,7 @@ export const CarouselContext = createContext<{
   onCardClose: (index: number) => void;
   currentIndex: number;
 }>({
-  onCardClose: () => {},
+  onCardClose: () => { },
   currentIndex: 0,
 });
 
@@ -153,7 +152,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   );
 };
 
-export const Card = ({
+export const AppleCard = ({
   card,
   index,
   layout = false,
@@ -259,13 +258,15 @@ export const Card = ({
         <BlurImage
           src={card.src}
           alt={card.title}
-          fill
+          // fill
           className="absolute inset-0 z-10 object-cover"
         />
       </motion.button>
     </>
   );
 };
+
+interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> { }
 
 export const BlurImage = ({
   height,
@@ -289,7 +290,6 @@ export const BlurImage = ({
       height={height}
       loading="lazy"
       decoding="async"
-      blurDataURL={typeof src === "string" ? src : undefined}
       alt={alt ? alt : "Background of a beautiful view"}
       {...rest}
     />
