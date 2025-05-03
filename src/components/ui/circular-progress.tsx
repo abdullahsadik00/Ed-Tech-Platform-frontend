@@ -7,7 +7,7 @@ interface CircularProgressProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function CircularProgress({ value,
-    size = 40,
+    size = 44,
     showPercentage = false,
     className,
     ...props}:CircularProgressProps){
