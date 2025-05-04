@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import InProgressTab from './InProgressTab'
 import HomeTab from './HomeTab'
 import UpcomingTab from './UpcomingTab'
+import CompletedTab from './CompletedTab'
 
 const MyCourse: React.FC = () => {
   
@@ -59,7 +60,9 @@ const MyCourse: React.FC = () => {
                   </div>
                 </div>
               </TabsContent>
-              <TabsContent value="completed">Change your password here.</TabsContent>
+              <TabsContent value="completed">
+                <CompletedTab/>
+                Change your password here.</TabsContent>
             </Tabs>
           </CardContent>
         </Card>
