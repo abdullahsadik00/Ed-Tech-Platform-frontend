@@ -217,7 +217,7 @@ const HomeTab: React.FC = () => {
                 </CardContent>
             </Card>
             <div>
-                <h3 className='leading-none font-semibold'>Upcomming course</h3>
+                <h3 className='leading-none font-semibold'>Upcoming course</h3>
                 <div className="w-full h-full py-8">
                     <AppleCarousel items={cards} />
                 </div>

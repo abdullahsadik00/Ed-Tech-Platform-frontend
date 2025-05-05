@@ -34,7 +34,7 @@ const MyCourse: React.FC = () => {
                   In Progress
                 </TabsTrigger>
                 <TabsTrigger
-                  value="upcomming"
+                  value="upcoming"
                   className="px-4 py-2 text-sm font-medium text-gray-700 data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-apple-sm rounded-md transition-all duration-200 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                 >
                   Upcoming
@@ -53,7 +53,7 @@ const MyCourse: React.FC = () => {
                 {/* <InProgressTab /> */}
                 <InProgressTab/>
               </TabsContent>
-              <TabsContent value="upcomming">
+              <TabsContent value="upcoming">
                 <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4 md:p-4">
                   <div className="max-w-7xl mx-auto">
                     <UpcomingTab />
