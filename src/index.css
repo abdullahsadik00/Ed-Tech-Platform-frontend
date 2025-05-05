@@ -1,256 +1,230 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body {
-  font-family: 'Inter', sans-serif;
-}
+@import 'tailwindcss';
+@layer theme, base, components, utilities;
 
 @layer base {
-  * {
-    @apply border-border dark:border-border-dark;
-  }
-
-  body {
-    @apply bg-background text-foreground dark:bg-background-dark dark:text-foreground-dark;
-  }
-}
-
-@layer utilities {
-  .dark ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  .dark ::-webkit-scrollbar-track {
-    @apply bg-zinc-800;
-    border-radius: 6px;
-  }
-
-  .dark ::-webkit-scrollbar-thumb {
-    @apply bg-zinc-600;
-    border-radius: 6px;
-    border: 3px solid transparent;
-    border-color: transparent;
-  }
-
-  .dark ::-webkit-scrollbar-thumb:hover {
-    @apply bg-zinc-500;
-  }
-
-  .dark ::-webkit-scrollbar-thumb:active {
-    @apply bg-zinc-400;
-  }
-
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #f0f0f0;
-    border-radius: 6px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #cccccc;
-    border-radius: 6px;
-    border: 3px solid transparent;
-    border-color: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #999999;
-  }
-
-  ::-webkit-scrollbar-thumb:active {
-    background: #777777;
-  }
-}
-
-/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'); */
-
-/* styles.css */
-/* @tailwind base; */
-/* @tailwind components; */
-/* @tailwind utilities; */
-
-/* body {
-
-  font-family: 'Inter', sans-serif;
-} */
-
-/* @layer base {
   :root {
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --primary-50: 226.7 100% 96.9%;
-    --primary-100: 223.6 100% 93.1%;
-    --primary-200: 223.5 100% 86.7%;
-    --primary-300: 223.8 100% 77.8%;
-    --primary-400: 223.9 100% 68.6%;
-    --primary-500: 224.3 76.3% 48%;
-    --primary-600: 225.9 70.7% 40.2%;
-    --primary-700: 226.5 69.7% 33.1%;
-    --primary-800: 226.9 70.7% 27.1%;
-    --primary-900: 224.4 71.4% 21.8%;
-
-    --secondary: 271 91% 65%;
-    --secondary-foreground: 210 40% 98%;
-    --secondary-50: 270 100% 98%;
-    --secondary-100: 268.7 100% 95.5%;
-    --secondary-200: 268.6 100% 91.8%;
-    --secondary-300: 269.2 97.4% 85.1%;
-    --secondary-400: 270 95.2% 75.3%;
-    --secondary-500: 271 91% 65%;
-    --secondary-600: 271.5 91.7% 56.5%;
-    --secondary-700: 272.1 71.7% 47.1%;
-    --secondary-800: 272.9 67.2% 39.4%;
-    --secondary-900: 273.6 65.6% 32%;
-
-    --accent: 173.4 100% 36.3%;
-    --accent-foreground: 210 40% 98%;
-    --accent-50: 171.4 100% 96.9%;
-    --accent-100: 170.8 100% 93.9%;
-    --accent-200: 171.5 100% 87.5%;
-    --accent-300: 172.4 100% 77.8%;
-    --accent-400: 173 100% 68.6%;
-    --accent-500: 173.4 100% 36.3%;
-    --accent-600: 174.2 100% 29.4%;
-    --accent-700: 174.3 100% 24.7%;
-    --accent-800: 174.1 100% 20%;
-    --accent-900: 174.3 100% 16.5%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5% 64.9%;
     --radius: 0.5rem;
+
+    /* EdTech-specific colors */
+    --student: 221.2 83.2% 53.3%;
+    --teacher: 262.1 83.3% 57.8%;
+    --parent: 346.8 77.2% 49.8%;
+    --lesson-complete: 142.1 76.2% 36.3%;
+    --lesson-incomplete: 24.6 95% 53.1%;
+    --quiz-score: 41.9 95.9% 50.4%;
+
+    .no-visible-scrollbar {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .no-visible-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --primary-50: 226.7 100% 96.9%;
-    --primary-100: 223.6 100% 93.1%;
-    --primary-200: 223.5 100% 86.7%;
-    --primary-300: 223.8 100% 77.8%;
-    --primary-400: 223.9 100% 68.6%;
-    --primary-500: 224.3 76.3% 48%;
-    --primary-600: 225.9 70.7% 40.2%;
-    --primary-700: 226.5 69.7% 33.1%;
-    --primary-800: 226.9 70.7% 27.1%;
-    --primary-900: 224.4 71.4% 21.8%;
-
-    --secondary: 271 91% 65%;
-    --secondary-foreground: 210 40% 98%;
-    --secondary-50: 270 100% 98%;
-    --secondary-100: 268.7 100% 95.5%;
-    --secondary-200: 268.6 100% 91.8%;
-    --secondary-300: 269.2 97.4% 85.1%;
-    --secondary-400: 270 95.2% 75.3%;
-    --secondary-500: 271 91% 65%;
-    --secondary-600: 271.5 91.7% 56.5%;
-    --secondary-700: 272.1 71.7% 47.1%;
-    --secondary-800: 272.9 67.2% 39.4%;
-    --secondary-900: 273.6 65.6% 32%;
-
-    --accent: 173.4 100% 36.3%;
-    --accent-foreground: 210 40% 98%;
-    --accent-50: 171.4 100% 96.9%;
-    --accent-100: 170.8 100% 93.9%;
-    --accent-200: 171.5 100% 87.5%;
-    --accent-300: 172.4 100% 77.8%;
-    --accent-400: 173 100% 68.6%;
-    --accent-500: 173.4 100% 36.3%;
-    --accent-600: 174.2 100% 29.4%;
-    --accent-700: 174.3 100% 24.7%;
-    --accent-800: 174.1 100% 20%;
-    --accent-900: 174.3 100% 16.5%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
-} */
-
-/* @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
+  /* Typography */
+  h1 {
+    scroll-margin-top: 5rem;
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+
+  h2 {
+    scroll-margin-top: 5rem;
+    font-size: 1.875rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  h3 {
+    scroll-margin-top: 5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  p {
+    line-height: 1.75;
+  }
+
+  /* new css */
+  /* Add to your global styles */
+.rdp {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.rdp-table {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.rdp-head {
+  display: flex !important;
+}
+
+.rdp-head_row {
+  display: flex !important;
+  width: 100% !important;
+}
+
+.rdp-head_cell {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 1 !important;
+}
+}
+@layer components {
+  /* Custom utilities */
+  .scrollbar-education {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) hsl(var(--background));
+  }
+
+  .scrollbar-education::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  .scrollbar-education::-webkit-scrollbar-track {
+    background-color: hsl(var(--background));
+  }
+
+  .scrollbar-education::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    background-color: hsl(var(--border));
+  }
+
+  .scrollbar-education::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--muted-foreground) / 0.3);
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* Role badges */
+/* .student-badge {
+    @apply bg-student/10 text-student border-student/20;
+  }
+  .teacher-badge {
+    @apply bg-teacher/10 text-teacher border-teacher/20;
+  }
+  .parent-badge {
+    @apply bg-parent/10 text-parent border-parent/20;
+  } */
+/* Role badges */
+/* .student-badge {
+  @apply bg-student/10 text-student border-student/20;
+}
+.teacher-badge {
+  @apply bg-teacher/10 text-teacher border-teacher/20;
+}
+.parent-badge {
+  @apply bg-parent/10 text-parent border-parent/20;
 } */
 
 @layer utilities {
-
-  /* Scrollbar styles */
-  ::-webkit-scrollbar {
-    width: 8px;
-    /* Width of the scrollbar */
-    height: 8px;
-    /* Height for horizontal scrollbar */
+  /* Custom scrollbar */
+  .scrollbar-education {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) hsl(var(--background));
   }
-
-  ::-webkit-scrollbar-track {
-    background: #f0f0f0;
-    /* Light gray background for the track */
-    border-radius: 6px;
-    /* Rounded corners for the track */
+  .scrollbar-education::-webkit-scrollbar {
+    width: 2px;
   }
+  /* .scrollbar-education::-webkit-scrollbar-track {
+    @apply bg-background;
+  } */
+  /* .scrollbar-education::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-border hover:bg-muted-foreground/30;
+  } */
 
-  ::-webkit-scrollbar-thumb {
-    background: #cccccc;
-    /* Light gray for the thumb */
-    border-radius: 6px;
-    /* Rounded corners for the thumb */
-    border: 3px solid transparent;
-    /* Space around the thumb */
-    border-color: transparent;
-    /* Match the track */
+  /* Animation utilities */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
   }
+  /* @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  } */
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: #999999;
-    /* Darker gray on hover */
+  /* Lesson progress indicators */
+  /* .lesson-complete {
+    @apply bg-lesson-complete/10 text-lesson-complete border-lesson-complete/20;
   }
-
-  ::-webkit-scrollbar-thumb:active {
-    background: #777777;
-    /* Even darker gray when active */
-  }
+  .lesson-incomplete {
+    @apply bg-lesson-incomplete/10 text-lesson-incomplete border-lesson-incomplete/20;
+  } */
 }
