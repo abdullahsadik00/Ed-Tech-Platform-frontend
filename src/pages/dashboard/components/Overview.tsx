@@ -1,18 +1,10 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Clock, AlertTriangle, BookOpen, BellIcon, SettingsIcon, Users } from "lucide-react"
+import { Clock, AlertTriangle, BookOpen, Users } from "lucide-react"
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -20,7 +12,6 @@ import {
 } from "@/components/ui/table"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
-import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { Calendar } from "@/components/ui/calendar"
 
@@ -80,11 +71,6 @@ export function Overview() {
     { title: "Science Project", due: "3 days", priority: "medium" }
   ]
 
-  const announcements = [
-    "New course material uploaded for Math 101",
-    "System maintenance scheduled for Friday night"
-  ]
-
   const recommendations = ["Physics 101", "Computer Science Basics"]
 
   const user =
@@ -92,8 +78,6 @@ export function Overview() {
     imageUrl: "",
     gradeLevel: '', name: '', program: "", initials: ""
   }
-
-
 
   return (
     <div className="space-y-6">
