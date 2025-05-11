@@ -5,10 +5,10 @@ import { ReactNode } from 'react';
 
 type UserRole = 'student' | 'teacher' | 'parent';
 
-interface User {
-  role?: UserRole;
-  // Add other user properties as needed
-}
+// interface User {
+//   role?: UserRole;
+//   // Add other user properties as needed
+// }
 interface ProtectedRouteProps {
   children?: ReactNode;
   allowedRoles?: UserRole[];

@@ -26,13 +26,13 @@ export const useAuth = create<AuthState>()(
       login: async (email, password) => {
         try {
           // Replace with actual API call
-          const mockUser = {
-            id: '123',
-            role: 'teacher', // Would come from API response
-            email: email,
-            name: 'John Doe',
-            password: password,
-          };
+          // const mockUser = {
+          //   id: '123',
+          //   role: 'teacher', // Would come from API response
+          //   email: email,
+          //   name: 'John Doe',
+          //   password: password,
+          // };
 
           // set({
           //   user: mockUser,
