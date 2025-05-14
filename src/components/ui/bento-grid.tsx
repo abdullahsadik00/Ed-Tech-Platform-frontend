@@ -22,10 +22,10 @@ export const BentoGrid = ({
 export const BentoGridItem = ({
   children,
   className,
-  title,
-  description,
+  // title,
+  // description,
   header,
-  icon,
+  // icon,
 }: {
   children?: React.ReactNode;
   className?: string;
