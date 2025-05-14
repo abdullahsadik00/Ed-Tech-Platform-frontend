@@ -228,7 +228,8 @@ const HomeTab: React.FC = () => {
                     <div className='text-sm font-semibold text-gray-700 cursor-pointer'>View all   &#8594;
                     </div>
                 </CardContent>
-            </Card></div>
+            </Card>
+            </div>
     )
 }
 

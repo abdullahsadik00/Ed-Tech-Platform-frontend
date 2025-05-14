@@ -5,10 +5,9 @@ import {
   ChevronLeft,
   ChevronRight,
   User,
-  Camera,
-  Upload,
+  Camera
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const Profile = () => {
   const [selectedGender, setSelectedGender] = useState('Select Gender');
@@ -70,21 +69,6 @@ const Profile = () => {
     }
   };
   
-
-  const socialMediaProfiles = [
-    {
-      name: 'Facebook',
-      icon: User,
-    },
-    {
-      name: 'Facebook',
-      icon: User,
-    },
-    {
-      name: 'Facebook',
-      icon: User,
-    },
-  ];
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

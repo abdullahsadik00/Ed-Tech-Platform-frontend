@@ -16,7 +16,8 @@ type AuthStore = {
 
 export const useAuthStore = create<AuthStore>((set) => ({
   user: null,
-  login: async (credentials) => {
+  // login: async (credentials) => {
+  login: async () => {
     // API call
     // set({ user: { id: '1', role: 'student', ...credentials } });
   },
