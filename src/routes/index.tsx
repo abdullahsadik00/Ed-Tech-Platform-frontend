@@ -14,10 +14,21 @@ export const routes = createRoutesFromElements(
   <Route>
     <Route path="/" element={<Landing />} />
     <Route path="/stud1" element={<StudentDashboard />}/>
+    <Route path="/teach1" element={<TeacherDashboard />}/>
 
     <Route element={<DashboardLayout />}>
         {/* Student Dashboard */}
         <Route path="/stud" element={<StudentDashboard />}>
+          <Route index element={<Overview />} />
+          <Route path="courses" element={<Courses />} />
+          <Route path="assignments" element={<Assignments />} />
+          <Route path="schedule" element={<Schedule />} />
+        </Route>
+      </Route>
+
+      <Route element={<DashboardLayout />}>
+        {/* Teacher Dashboard */}
+        <Route path="/teach" element={<TeacherDashboard />}>
           <Route index element={<Overview />} />
           <Route path="courses" element={<Courses />} />
           <Route path="assignments" element={<Assignments />} />
