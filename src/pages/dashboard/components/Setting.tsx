@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User, MapPin, CreditCard, Lock, Bell, Building2 } from 'lucide-react';
-import Profile from './Profile';
+import Profile from './profile/Profile';
 import Address from './Address';
 import PasswordUpdate from './PasswordUpdate';
 import Notification from './Notification';

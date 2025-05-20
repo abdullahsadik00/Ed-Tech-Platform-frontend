@@ -27,7 +27,7 @@ const DashboardLayout = () => {
         return <Assignments />;
       case 3:
         return <Schedule />;
-        case 8:
+      case 8:
           return <Setting/>
       default:
         return <Overview />;
