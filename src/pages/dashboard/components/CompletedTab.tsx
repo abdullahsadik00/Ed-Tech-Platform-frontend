@@ -68,16 +68,7 @@ const FeedbackModule: React.FC<FeedbackModuleProps> = ({ course }) => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        // In a real app, this would submit to an API
-        console.log({
-            courseId: course.id,
-            overallRating: rating,
-            instructorRating,
-            contentRating,
-            exercisesRating,
-            feedbackText
-        });
-
+        // TODO: submit rating to API
         setSubmitted(true);
     };
 

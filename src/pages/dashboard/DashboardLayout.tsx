@@ -1,36 +1,26 @@
-import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
   SidebarProvider,
-  SidebarMenu
+  SidebarMenu,
 } from '@/components/ui/sidebar';
 import { Header } from '@/components/ui/header';
 import { StudentMenu } from '@/components/dashboard/menu/StudentMenu';
-import { Overview } from '@/pages/dashboard/components/Overview';
-import { Courses } from '@/pages/dashboard/components/Courses';
-import { Assignments } from '@/pages/dashboard/components/Assignments';
-import { Schedule } from '@/pages/dashboard/components/Schedule';
-import Setting from './components/Setting';
+import { TeacherMenu } from '@/components/dashboard/menu/TeacherMenu';
+import { useAuth } from '@/hooks/use-auth';
 
 const DashboardLayout = () => {
-  const [activeMenuIndex, setActiveMenuIndex] = useState(0);
+  const { user } = useAuth();
 
-  const renderComponent = () => {
-    switch (activeMenuIndex) {
-      case 0:
-        return <Overview />;
-      case 1:
-        return <Courses />;
-      case 2:
-        return <Assignments />;
-      case 3:
-        return <Schedule />;
-        case 8:
-          return <Setting/>
+  const renderMenu = () => {
+    switch (user?.role) {
+      case 'teacher':
+      case 'admin':
+        return <TeacherMenu />;
       default:
-        return <Overview />;
+        return <StudentMenu />;
     }
   };
 
@@ -40,11 +30,14 @@ const DashboardLayout = () => {
         <Sidebar>
           <SidebarHeader className="border-b px-4 py-3">
             <h2 className="text-xl font-bold">EdTech</h2>
+            {user && (
+              <p className="text-xs text-muted-foreground capitalize">{user.role}</p>
+            )}
           </SidebarHeader>
 
           <SidebarContent>
             <SidebarMenu>
-              <StudentMenu onMenuClick={setActiveMenuIndex} />
+              {renderMenu()}
             </SidebarMenu>
           </SidebarContent>
         </Sidebar>
@@ -53,7 +46,7 @@ const DashboardLayout = () => {
           <Header />
           <main className="flex-1 overflow-auto bg-[#f6f6f6]">
             <div className="container mx-auto p-6">
-              {renderComponent()}
+              <Outlet />
             </div>
           </main>
         </div>

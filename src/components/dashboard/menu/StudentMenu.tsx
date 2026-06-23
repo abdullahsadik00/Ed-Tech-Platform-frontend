@@ -1,75 +1,44 @@
-import { BookOpen, LayoutDashboard, GraduationCap, Calendar } from 'lucide-react';
+import {
+  BookOpen,
+  LayoutDashboard,
+  ClipboardList,
+  Calendar,
+  BarChart2,
+  MessageSquare,
+  FolderOpen,
+  Settings,
+  CalendarDays,
+} from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 import { SidebarMenuItem, SidebarMenuButton } from '@/components/ui/sidebar';
 
-interface StudentMenuProps {
-  onMenuClick: (index: number) => void;
-}
+const menuItems = [
+  { to: '/student',           end: true,  icon: LayoutDashboard, label: 'Dashboard' },
+  { to: '/student/courses',   end: false, icon: BookOpen,         label: 'My Courses' },
+  { to: '/student/assignments', end: false, icon: ClipboardList,  label: 'Assignments' },
+  { to: '/student/schedule',  end: false, icon: Calendar,         label: 'Schedule' },
+  { to: '/student/grades',    end: false, icon: BarChart2,        label: 'Grades' },
+  { to: '/student/calendar',  end: false, icon: CalendarDays,     label: 'Calendar' },
+  { to: '/student/messages',  end: false, icon: MessageSquare,    label: 'Messages' },
+  { to: '/student/resources', end: false, icon: FolderOpen,       label: 'Resources' },
+  { to: '/student/settings',  end: false, icon: Settings,         label: 'Settings' },
+];
 
-export function StudentMenu({ onMenuClick }: StudentMenuProps) {
+export function StudentMenu() {
   return (
     <>
-      <SidebarMenuItem onClick={() => onMenuClick(0)}>
-        <SidebarMenuButton tooltip="Dashboard">
-          <LayoutDashboard className="h-4 w-4" />
-          <span>Dashboard</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-
-      <SidebarMenuItem onClick={() => onMenuClick(1)}>
-        <SidebarMenuButton tooltip="My Courses">
-          <BookOpen className="h-4 w-4" />
-          <span>My Courses</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-
-      <SidebarMenuItem onClick={() => onMenuClick(2)}>
-        <SidebarMenuButton tooltip="Assignments">
-          <GraduationCap className="h-4 w-4" />
-          <span>Assignments</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-
-      <SidebarMenuItem onClick={() => onMenuClick(3)}>
-        <SidebarMenuButton tooltip="Schedule">
-          <Calendar className="h-4 w-4" />
-          <span>Schedule</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-
-      <SidebarMenuItem onClick={() => onMenuClick(4)}>
-        <SidebarMenuButton tooltip="Schedule">
-          <Calendar className="h-4 w-4" />
-          <span>Grades</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-
-      <SidebarMenuItem onClick={() => onMenuClick(5)}>
-        <SidebarMenuButton tooltip="Schedule">
-          <Calendar className="h-4 w-4" />
-          <span>Calendar</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-
-      <SidebarMenuItem onClick={() => onMenuClick(6)}>
-        <SidebarMenuButton tooltip="Schedule">
-          <Calendar className="h-4 w-4" />
-          <span>Messages</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-
-      <SidebarMenuItem onClick={() => onMenuClick(7)}>
-        <SidebarMenuButton tooltip="Schedule">
-          <Calendar className="h-4 w-4" />
-          <span>Resources</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-
-      <SidebarMenuItem onClick={() => onMenuClick(8)}>
-        <SidebarMenuButton tooltip="Schedule">
-          <Calendar className="h-4 w-4" />
-          <span>Profile & Settings</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
+      {menuItems.map(({ to, end, icon: Icon, label }) => (
+        <SidebarMenuItem key={to}>
+          <NavLink to={to} end={end}>
+            {({ isActive }) => (
+              <SidebarMenuButton tooltip={label} isActive={isActive}>
+                <Icon className="h-4 w-4" />
+                <span>{label}</span>
+              </SidebarMenuButton>
+            )}
+          </NavLink>
+        </SidebarMenuItem>
+      ))}
     </>
   );
 }

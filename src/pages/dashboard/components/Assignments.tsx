@@ -128,7 +128,7 @@ export function Assignments() {
                 </TabsContent>
               </div>
             </Tabs>
-            {/* paggination */}
+            {/* pagination */}
             <Pagination className="mt-6">
               <PaginationContent>
                 <PaginationItem>

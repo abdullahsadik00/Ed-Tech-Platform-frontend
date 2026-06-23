@@ -1,9 +1,8 @@
-import React from 'react'
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 const ParentDashboard: React.FC = () => {
-    return (
-        <div>parent</div>
-    )
-}
+  return <Outlet />;
+};
 
-export default ParentDashboard
+export default ParentDashboard;

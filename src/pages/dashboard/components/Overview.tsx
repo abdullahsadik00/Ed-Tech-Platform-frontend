@@ -176,9 +176,7 @@ export function   Overview() {
       </Card>
       <Card className="w-[35%]">
       <CardContent>
-
-Card
-</CardContent>
+      </CardContent>
       </Card>
       </div>
 </div>

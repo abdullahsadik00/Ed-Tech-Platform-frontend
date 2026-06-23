@@ -62,7 +62,7 @@ const MyCourse: React.FC = () => {
               </TabsContent>
               <TabsContent value="completed">
                 <CompletedTab/>
-                Change your password here.</TabsContent>
+              </TabsContent>
             </Tabs>
           </CardContent>
         </Card>

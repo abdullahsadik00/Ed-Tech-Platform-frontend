@@ -151,7 +151,7 @@ const InProgressTab: React.FC = () => {
 
     const handleBulkAction = (action: 'complete' | 'calender') => {
         // Implement bulk action logic
-        console.log(`Performing ${action} on selected courses:`, selectedCourses);
+        // TODO: implement bulk action API call
     };
 
     if (courses.length === 0) {

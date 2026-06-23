@@ -10,7 +10,6 @@ import PaymentMethod from './PaymentMethod';
 
 const Setting = () => {
   const [index, setIndex] = useState(0);
-  console.log(`Setting ${index}`);
 
   const menuItems = [
     { icon: User, text: 'Profile' },

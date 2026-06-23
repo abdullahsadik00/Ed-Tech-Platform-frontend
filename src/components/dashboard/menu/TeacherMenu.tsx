@@ -1,54 +1,30 @@
 import { BookOpen, LayoutDashboard, Users, ClipboardList, Calendar } from 'lucide-react';
-import { SidebarMenuItem, SidebarMenuButton } from '@/components/ui/sidebar';
 import { NavLink } from 'react-router-dom';
+import { SidebarMenuItem, SidebarMenuButton } from '@/components/ui/sidebar';
+
+const menuItems = [
+  { to: '/teacher',              end: true,  icon: LayoutDashboard, label: 'Dashboard' },
+  { to: '/teacher/courses',      end: false, icon: BookOpen,        label: 'Courses' },
+  { to: '/teacher/students',     end: false, icon: Users,           label: 'Students' },
+  { to: '/teacher/assignments',  end: false, icon: ClipboardList,   label: 'Assignments' },
+  { to: '/teacher/schedule',     end: false, icon: Calendar,        label: 'Schedule' },
+];
 
 export function TeacherMenu() {
   return (
     <>
-      <SidebarMenuItem>
-        <NavLink to="/dashboard">
-          <SidebarMenuButton tooltip="Dashboard">
-            <LayoutDashboard className="h-4 w-4" />
-            <span>Dashboard</span>
-          </SidebarMenuButton>
-        </NavLink>
-      </SidebarMenuItem>
-
-      <SidebarMenuItem>
-        <NavLink to="/dashboard/courses">
-          <SidebarMenuButton tooltip="Courses">
-            <BookOpen className="h-4 w-4" />
-            <span>Courses</span>
-          </SidebarMenuButton>
-        </NavLink>
-      </SidebarMenuItem>
-
-      <SidebarMenuItem>
-        <NavLink to="/dashboard/students">
-          <SidebarMenuButton tooltip="Students">
-            <Users className="h-4 w-4" />
-            <span>Students</span>
-          </SidebarMenuButton>
-        </NavLink>
-      </SidebarMenuItem>
-
-      <SidebarMenuItem>
-        <NavLink to="/dashboard/assignments">
-          <SidebarMenuButton tooltip="Assignments">
-            <ClipboardList className="h-4 w-4" />
-            <span>Assignments</span>
-          </SidebarMenuButton>
-        </NavLink>
-      </SidebarMenuItem>
-
-      <SidebarMenuItem>
-        <NavLink to="/dashboard/schedule">
-          <SidebarMenuButton tooltip="Schedule">
-            <Calendar className="h-4 w-4" />
-            <span>Schedule</span>
-          </SidebarMenuButton>
-        </NavLink>
-      </SidebarMenuItem>
+      {menuItems.map(({ to, end, icon: Icon, label }) => (
+        <SidebarMenuItem key={to}>
+          <NavLink to={to} end={end}>
+            {({ isActive }) => (
+              <SidebarMenuButton tooltip={label} isActive={isActive}>
+                <Icon className="h-4 w-4" />
+                <span>{label}</span>
+              </SidebarMenuButton>
+            )}
+          </NavLink>
+        </SidebarMenuItem>
+      ))}
     </>
   );
 }

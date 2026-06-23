@@ -1,9 +1,8 @@
-import React from 'react'
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 const TeacherDashboard: React.FC = () => {
-    return (
-        <div>teacher</div>
-    )
-}
+  return <Outlet />;
+};
 
-export default TeacherDashboard
+export default TeacherDashboard;
