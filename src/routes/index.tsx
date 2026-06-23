@@ -5,6 +5,11 @@ import StudentDashboard from '@/pages/dashboard/student/student.dashboard';
 import Landing from '@/pages/Landing/Landing';
 import LoginPage from '@/pages/auth/Login';
 import Unauthorized from '@/pages/Unauthorized';
+import CourseListing from '@/pages/courses/CourseListing';
+import CourseDetail from '@/pages/courses/CourseDetail';
+import CreateCourse from '@/pages/instructor/CreateCourse';
+import CourseEditor from '@/pages/instructor/CourseEditor';
+import CoursePlayer from '@/pages/learn/CoursePlayer';
 import { ProtectedRoute } from './protectedRoute';
 import DashboardLayout from '@/pages/dashboard/DashboardLayout';
 import { Overview } from '@/pages/dashboard/components/Overview';
@@ -21,10 +26,19 @@ const ComingSoon = ({ label }: { label: string }) => (
 
 export const routes = createRoutesFromElements(
   <Route>
+    {/* Public routes */}
     <Route path="/" element={<Landing />} />
     <Route path="/login" element={<LoginPage />} />
     <Route path="/unauthorized" element={<Unauthorized />} />
+    <Route path="/courses" element={<CourseListing />} />
+    <Route path="/courses/:id" element={<CourseDetail />} />
 
+    {/* Full-screen player — auth required, no dashboard sidebar */}
+    <Route element={<ProtectedRoute />}>
+      <Route path="/learn/:courseId" element={<CoursePlayer />} />
+    </Route>
+
+    {/* Dashboard routes */}
     <Route element={<ProtectedRoute />}>
       <Route element={<DashboardLayout />}>
 
@@ -45,6 +59,8 @@ export const routes = createRoutesFromElements(
         <Route path="/teacher" element={<TeacherDashboard />}>
           <Route index element={<Overview />} />
           <Route path="courses" element={<Courses />} />
+          <Route path="courses/new" element={<CreateCourse />} />
+          <Route path="courses/:id/edit" element={<CourseEditor />} />
           <Route path="assignments" element={<Assignments />} />
           <Route path="schedule" element={<Schedule />} />
           <Route path="students" element={<ComingSoon label="Students" />} />

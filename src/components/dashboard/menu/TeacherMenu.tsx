@@ -1,10 +1,11 @@
-import { BookOpen, LayoutDashboard, Users, ClipboardList, Calendar } from 'lucide-react';
+import { BookOpen, LayoutDashboard, Users, ClipboardList, Calendar, Plus } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { SidebarMenuItem, SidebarMenuButton } from '@/components/ui/sidebar';
 
 const menuItems = [
   { to: '/teacher',              end: true,  icon: LayoutDashboard, label: 'Dashboard' },
-  { to: '/teacher/courses',      end: false, icon: BookOpen,        label: 'Courses' },
+  { to: '/teacher/courses',      end: false, icon: BookOpen,        label: 'My Courses' },
+  { to: '/teacher/courses/new',  end: false, icon: Plus,            label: 'Create Course' },
   { to: '/teacher/students',     end: false, icon: Users,           label: 'Students' },
   { to: '/teacher/assignments',  end: false, icon: ClipboardList,   label: 'Assignments' },
   { to: '/teacher/schedule',     end: false, icon: Calendar,        label: 'Schedule' },
