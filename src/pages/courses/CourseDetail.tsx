@@ -1,7 +1,6 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
   BookOpen,
-  ChevronDown,
   Clock,
   Globe,
   Users,

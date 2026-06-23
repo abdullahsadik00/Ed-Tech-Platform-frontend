@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import {
   Plus,
   Trash2,
@@ -275,7 +275,6 @@ function SectionItem({ section, courseId }: SectionItemProps) {
 
 export default function CourseEditor() {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const courseId = Number(id);
   const [addingSection, setAddingSection] = useState(false);
 

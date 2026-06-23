@@ -149,7 +149,7 @@ const InProgressTab: React.FC = () => {
         }
     };
 
-    const handleBulkAction = (action: 'complete' | 'calender') => {
+    const handleBulkAction = (_action: 'complete' | 'calender') => {
         // Implement bulk action logic
         // TODO: implement bulk action API call
     };

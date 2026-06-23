@@ -3,7 +3,7 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '@/hooks/use-auth';
 import { ReactNode } from 'react';
 
-type UserRole = 'student' | 'teacher' | 'parent';
+type UserRole = 'student' | 'teacher' | 'parent' | 'admin';
 
 // interface User {
 //   role?: UserRole;

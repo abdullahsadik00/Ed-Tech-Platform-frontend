@@ -1,297 +1,272 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Clock, AlertTriangle, BookOpen, Users } from "lucide-react"
-import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+  BookOpen,
+  Users,
+  TrendingUp,
+  CheckCircle2,
+  Play,
+} from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Calendar } from '@/components/ui/calendar';
+import { useAuth } from '@/hooks/use-auth';
+import { useMyEnrollments } from '@/hooks/queries/use-enrollment';
+import { useInstructorCourses } from '@/hooks/queries/use-courses';
 
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
-// import { Button } from "@/components/ui/button"
-import { useState } from "react"
-import { Calendar } from "@/components/ui/calendar"
+type ColorKey = 'blue' | 'amber' | 'emerald' | 'violet';
 
-export function   Overview() {
-  const [date, setDate] = useState<Date | undefined>(new Date())
+const colorMap: Record<ColorKey, { bg: string; text: string; iconBg: string }> = {
+  blue: { bg: 'bg-blue-50', text: 'text-blue-600', iconBg: 'bg-blue-100' },
+  amber: { bg: 'bg-amber-50', text: 'text-amber-600', iconBg: 'bg-amber-100' },
+  emerald: { bg: 'bg-emerald-50', text: 'text-emerald-600', iconBg: 'bg-emerald-100' },
+  violet: { bg: 'bg-violet-50', text: 'text-violet-600', iconBg: 'bg-violet-100' },
+};
 
-  const examSchedule = [
-    {
-      subject: "Mathematics",
-      date: "2025-05-03",
-      time: "10:00 AM",
-      duration: "2 hours",
-      location: "Room 204, Building A",
-      notes: "Bring calculator and geometry set.",
-      status:"completed"
-    },
-    {
-      subject: "Physics",
-      date: "2025-05-05",
-      time: "1:00 PM",
-      duration: "3 hours",
-      location: "Lab 3, Science Block",
-      notes: "Lab coat required.",
-      status:"ongoing"
-    },
-    {
-      subject: "English Literature",
-      date: "2025-05-07",
-      time: "9:00 AM",
-      duration: "2.5 hours",
-      location: "Main Hall",
-      notes: "Essay-based questions. No electronic devices allowed.",
-      status:"completed"
-    },
-    {
-      subject: "Computer Science",
-      date: "2025-05-09",
-      time: "11:30 AM",
-      duration: "2 hours",
-      location: "Computer Lab 1",
-      notes: "Practical + theory sections.",
-      status:"completed"
-    },
-    {
-      subject: "History",
-      date: "2025-05-11",
-      time: "8:00 AM",
-      duration: "3 hours",
-      location: "Room 101, Humanities Wing",
-      notes: "Open book exam. Bring all course materials.",
-      status:"completed"
-    }
-  ]
-  
-  const deadlines = [
-    { title: "Math Assignment", due: "Tomorrow", priority: "high" },
-    { title: "Science Project", due: "3 days", priority: "medium" }
-  ]
+function StatCard({
+  icon: Icon,
+  label,
+  value,
+  color,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  value: number;
+  color: ColorKey;
+}) {
+  const c = colorMap[color];
+  return (
+    <div className={`${c.bg} rounded-xl p-4 flex items-center gap-3`}>
+      <div className={`${c.iconBg} p-2.5 rounded-lg`}>
+        <Icon className={`h-5 w-5 ${c.text}`} />
+      </div>
+      <div>
+        <p className="text-2xl font-bold text-gray-900">{value}</p>
+        <p className="text-xs text-gray-500">{label}</p>
+      </div>
+    </div>
+  );
+}
 
-  const recommendations = ["Physics 101", "Computer Science Basics"]
+function StudentOverview({ name }: { name: string }) {
+  const { data, isLoading } = useMyEnrollments();
+  const enrollments = data?.data ?? [];
 
-  const user =
-  {
-    imageUrl: "",
-    gradeLevel: '', name: '', program: "", initials: ""
-  }
+  const total = enrollments.length;
+  const completed = enrollments.filter((e) => e.status === 'COMPLETED').length;
+  const inProgress = enrollments.filter(
+    (e) => (e.progress ?? 0) > 0 && e.status === 'ACTIVE'
+  ).length;
 
-
+  const recentEnrollments = enrollments.slice(0, 3);
 
   return (
-    <div className="space-y-6">
-
-{/* Welcome card */}
-<div className="max-w-6xl mx-auto">
-<Card className="bg-blue-200/10 border-0">
-  <CardContent>
-    <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-primary-600 to-primary-500">
-      <div className="flex items-center justify-between">
-        <div className="space-y-2">
-          <h2 className="text-xl font-semibold">
-            Welcome Back, Teacher!
+    <div className="space-y-5">
+      <Card className="border-0 text-white overflow-hidden">
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-5 relative overflow-hidden">
+          <div className="absolute -right-6 -top-6 h-28 w-28 rounded-full bg-white/10" />
+          <div className="absolute -right-2 bottom-0 h-16 w-16 rounded-full bg-white/10" />
+          <h2 className="text-xl font-semibold mb-1 relative">
+            Welcome back, {name || 'Student'}!
           </h2>
-          <p className="text-primary-100 ">
-            Your students are doing great!
-            <span className="mx-1 font-bold text-slate-900">60%</span>
-            have completed their exams.
+          <p className="text-blue-100 text-sm relative">
+            {inProgress > 0
+              ? `${inProgress} course${inProgress !== 1 ? 's' : ''} in progress — keep going!`
+              : total > 0
+              ? 'Pick up where you left off.'
+              : 'Start your learning journey today.'}
           </p>
         </div>
-        <div className="hidden md:block">
-          <Users className="h-24 w-24 text-primary-200/50" />
+      </Card>
+
+      {isLoading ? (
+        <div className="grid grid-cols-3 gap-3">
+          {[1, 2, 3].map((i) => (
+            <Skeleton key={i} className="h-20" />
+          ))}
         </div>
-      </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <StatCard icon={BookOpen} label="Enrolled" value={total} color="blue" />
+          <StatCard icon={TrendingUp} label="In Progress" value={inProgress} color="amber" />
+          <StatCard icon={CheckCircle2} label="Completed" value={completed} color="emerald" />
+        </div>
+      )}
 
-      {/* Decorative elements */}
-      <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-primary-400/20 " />
-      <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-primary-400/20 " />
-    </div>
-  </CardContent>
-</Card></div>
-
-{/* submitted test */}
-<Card className="max-w-6xl mx-auto bg-white"> 
-  <CardHeader className="font-semibold">Exam Schedule</CardHeader>
-  <CardContent>
-<Table>
-  {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
-  <TableHeader>
-    <TableRow>
-      <TableHead className="w-[100px]">No</TableHead>
-      <TableHead>Date</TableHead>
-      <TableHead>Time</TableHead>
-      <TableHead>Subject </TableHead>
-      <TableHead className="text-center">Status</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-      {examSchedule.map((examDetail,i)=>(
-    <TableRow>
-      <TableCell className="font-medium" key={i}>{i + 1}</TableCell>  
-      <TableCell className="font-medium">{examDetail.date}</TableCell>
-      <TableCell>{examDetail.time}</TableCell>
-      <TableCell>{examDetail.subject}</TableCell>
-      <TableCell className="text-center">{examDetail.status}</TableCell>
-      
-      {/* <TableCell className="font-medium">INV001</TableCell>
-      <TableCell>Paid</TableCell>
-      <TableCell>Credit Card</TableCell> */}
-      {/* <TableCell className="text-right">$250.00</TableCell> */}
-    </TableRow>
-      ))}
-  </TableBody>
-</Table>
-</CardContent>
-</Card>
-
-{/* chat card */}
-<div className="max-w-6xl mx-auto ">
-      <div className="flex gap-4">
-
-      <Card className="w-[71%]">
-        <CardHeader>
-          <CardTitle>All Chats</CardTitle>
-        </CardHeader>
-        <CardContent>
-
+      {(isLoading || recentEnrollments.length > 0) && (
         <Card>
-          <CardContent className="flex justify-between">
-            <div className="flex items-center justify-between gap-2">
-              <div>
-                <Avatar className="w-12 h-12">
-                <AvatarImage src="https://pinnacle.works/wp-content/uploads/2022/06/dummy-image.jpg" className="w-12 h-12"/>
-                <AvatarFallback>{user.initials}</AvatarFallback>
-              </Avatar>
-              </div>
-              <p className="pl-2">Sadik Shaikh</p>
-            </div>
-            <div>View</div>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-semibold text-gray-800">
+              Continue learning
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-1">
+            {isLoading
+              ? [1, 2, 3].map((i) => <Skeleton key={i} className="h-14" />)
+              : recentEnrollments.map((enrollment) => (
+                  <Link
+                    key={enrollment.id}
+                    to={`/learn/${enrollment.courseId}`}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    <div className="flex-shrink-0 w-9 h-9 rounded-md bg-blue-100 flex items-center justify-center">
+                      <Play className="h-3.5 w-3.5 text-blue-600" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-gray-900 truncate">
+                        {enrollment.course?.title ?? 'Course'}
+                      </p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <Progress value={enrollment.progress ?? 0} className="h-1 flex-1" />
+                        <span className="text-[10px] text-gray-400 flex-shrink-0 w-7 text-right">
+                          {Math.round(enrollment.progress ?? 0)}%
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+            {!isLoading && enrollments.length > 3 && (
+              <Button variant="ghost" size="sm" asChild className="w-full mt-1">
+                <Link to="/student/courses" className="text-xs text-blue-600">
+                  View all courses
+                </Link>
+              </Button>
+            )}
           </CardContent>
         </Card>
-        </CardContent>
-      </Card>
-      <Card className="w-[35%]">
-      <CardContent>
-      </CardContent>
-      </Card>
-      </div>
-</div>
-      <BentoGrid className="max-w-6xl mx-auto">
-        {/* Upcoming Deadlines */}
-        <BentoGridItem
-          title="Upcoming Deadlinessdsd"
-          header={<Clock className="h-5 w-5" />}
-          className="md:col-span-2"
-        > Upcpmming deadlinesw3232
-          <div className="grid gap-4">
-            {deadlines.map((item, index) => (
-              <Card key={index} className={item.priority === "high" ? "border-red-200" : "border-yellow-200"}>
-                <CardHeader className="flex flex-row items-center justify-between">
-                  <CardTitle>{item.title}</CardTitle>
-                  {item.priority === "high" ? (
-                    <span className="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">High Priority</span>
-                  ) : (
-                    <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Medium Priority</span>
-                  )}
-                </CardHeader>
-                <CardContent>
-                  <p>Due: {item.due}</p>
-                </CardContent>
-              </Card>
-            ))}
-            {/* <Card className="p-6 flex items-center gap-4">
-              <Avatar>
-                <AvatarImage src={user.imageUrl} />
-                <AvatarFallback>{user.initials}</AvatarFallback>
-              </Avatar>
-              <div>
-                <CardTitle>{user.name}</CardTitle>
-                <CardDescription>{user.program} • {user.gradeLevel}</CardDescription>
-                <div className="flex gap-2 mt-2">
-                  <Button variant="outline" size="sm">
-                    <BellIcon className="w-4 h-4 mr-1" /> Notifications
-                  </Button>
-                  <Button variant="outline" size="sm">
-                    <SettingsIcon className="w-4 h-4 mr-1" /> Settings
-                  </Button>
-                </div>
-              </div>
-            </Card> */}
-          </div>
-        </BentoGridItem>
-
-        {/* Recent Announcements */}
-        <BentoGridItem
-          title=""
-          // header={<Bell className="h-5 w-5" />}
-          className="p-0 bg-amber-100/10">
-          <div className="">
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={setDate}
-              className="rounded-md"
-            /></div>
-          {/* <div className="space-y-3">
-            {announcements.map((item, index) => (
-              <Alert key={index} variant="default">
-                <AlertDescription>{item}</AlertDescription>
-              </Alert>
-            ))}
-          </div> */}
-        </BentoGridItem>
-
-        {/* System Alerts */}
-        <BentoGridItem
-          title="System Status"
-          header={<AlertTriangle className="h-5 w-5" />}
-          className="bg-red-50"
-        >
-          <Alert variant="destructive">
-            <AlertTriangle className="h-4 w-4" />
-            <AlertTitle>Warning</AlertTitle>
-            <AlertDescription>
-              Scheduled maintenance this Friday from 10PM to 2AM
-            </AlertDescription>
-          </Alert>
-        </BentoGridItem>
-
-        {/* Course Recommendations */}
-        <BentoGridItem
-          title="Recommended Courses"
-          header={<BookOpen className="h-5 w-5" />}
-          className="md:col-span-2"
-        >
-          <div className="grid gap-4 md:grid-cols-2">
-            {recommendations.map((course, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <CardTitle>{course}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <button className="text-sm text-primary">View Details</button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            {recommendations.map((course, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <CardTitle>{course}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <button className="text-sm text-primary">View Details</button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </BentoGridItem>
-      </BentoGrid>
+      )}
     </div>
-  )
+  );
+}
+
+function InstructorOverview({ name }: { name: string }) {
+  const { data, isLoading } = useInstructorCourses();
+  const courses = data?.data ?? [];
+
+  const total = courses.length;
+  const published = courses.filter((c) => c.published).length;
+  const totalStudents = courses.reduce(
+    (sum, c) => sum + (c._count?.enrollments ?? 0),
+    0
+  );
+
+  const recentCourses = courses.slice(0, 4);
+
+  return (
+    <div className="space-y-5">
+      <Card className="border-0 text-white overflow-hidden">
+        <div className="bg-gradient-to-r from-violet-600 to-purple-600 px-6 py-5 relative overflow-hidden">
+          <div className="absolute -right-6 -top-6 h-28 w-28 rounded-full bg-white/10" />
+          <div className="absolute -right-2 bottom-0 h-16 w-16 rounded-full bg-white/10" />
+          <h2 className="text-xl font-semibold mb-1 relative">
+            Welcome back, {name || 'Instructor'}!
+          </h2>
+          <p className="text-violet-100 text-sm relative">
+            {published > 0
+              ? `${published} published course${published !== 1 ? 's' : ''} · ${totalStudents} student${totalStudents !== 1 ? 's' : ''} enrolled`
+              : total > 0
+              ? 'Publish your draft course to reach students.'
+              : 'Create your first course to start teaching.'}
+          </p>
+        </div>
+      </Card>
+
+      {isLoading ? (
+        <div className="grid grid-cols-3 gap-3">
+          {[1, 2, 3].map((i) => (
+            <Skeleton key={i} className="h-20" />
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <StatCard icon={BookOpen} label="Total courses" value={total} color="violet" />
+          <StatCard icon={TrendingUp} label="Published" value={published} color="emerald" />
+          <StatCard icon={Users} label="Total students" value={totalStudents} color="blue" />
+        </div>
+      )}
+
+      {(isLoading || recentCourses.length > 0) && (
+        <Card>
+          <CardHeader className="pb-2 flex flex-row items-center justify-between">
+            <CardTitle className="text-sm font-semibold text-gray-800">My courses</CardTitle>
+            {!isLoading && courses.length > 4 && (
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/teacher/courses" className="text-xs text-blue-600">
+                  View all
+                </Link>
+              </Button>
+            )}
+          </CardHeader>
+          <CardContent className="space-y-1">
+            {isLoading
+              ? [1, 2, 3].map((i) => <Skeleton key={i} className="h-12" />)
+              : recentCourses.map((course) => (
+                  <Link
+                    key={course.id}
+                    to={`/teacher/courses/${course.id}/edit`}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-gray-900 truncate">
+                        {course.title}
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        {course._count?.enrollments ?? 0} students
+                      </p>
+                    </div>
+                    <Badge
+                      variant={course.published ? 'default' : 'secondary'}
+                      className={`text-xs flex-shrink-0 ${course.published ? 'bg-emerald-600' : ''}`}
+                    >
+                      {course.published ? 'Live' : 'Draft'}
+                    </Badge>
+                  </Link>
+                ))}
+            {!isLoading && courses.length === 0 && (
+              <Button asChild size="sm" className="w-full mt-2">
+                <Link to="/teacher/courses/new">Create your first course</Link>
+              </Button>
+            )}
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
+}
+
+export function Overview() {
+  const { user } = useAuth();
+  const [date, setDate] = useState<Date | undefined>(new Date());
+
+  const isInstructor = user?.role === 'teacher' || user?.role === 'admin';
+  const firstName = user?.name?.split(' ')[0] ?? '';
+
+  return (
+    <div className="max-w-6xl mx-auto">
+      <div className="flex gap-6 items-start">
+        <div className="flex-1 min-w-0">
+          {isInstructor ? (
+            <InstructorOverview name={firstName} />
+          ) : (
+            <StudentOverview name={firstName} />
+          )}
+        </div>
+        <div className="w-72 flex-shrink-0 hidden lg:block">
+          <Card>
+            <CardContent className="pt-4 px-3 pb-3">
+              <Calendar
+                mode="single"
+                selected={date}
+                onSelect={setDate}
+                className="rounded-md w-full"
+              />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
 }
