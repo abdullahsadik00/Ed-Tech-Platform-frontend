@@ -113,7 +113,7 @@ export default function CoursePlayer() {
     }
   }, [sections, activeSectionId]);
 
-  const completedIds = progressData?.data.completedSectionIds ?? [];
+  const completedIds = progressData?.data.completedSubSectionIds ?? [];
   const progress = progressData?.data.progress ?? 0;
 
   const activeSection = sections.find((s) => s.id === activeSectionId);
@@ -121,8 +121,13 @@ export default function CoursePlayer() {
     (ss) => ss.id === activeSubSectionId
   );
 
-  const isSectionComplete = (sectionId: number) =>
-    completedIds.includes(sectionId);
+  const isSubSectionComplete = (subSectionId: number) =>
+    completedIds.includes(subSectionId);
+
+  // A section is complete only when every one of its lessons is complete.
+  const isSectionComplete = (section: Section) =>
+    section.subSections.length > 0 &&
+    section.subSections.every((ss) => completedIds.includes(ss.id));
 
   function selectSubSection(section: Section, ss: SubSection) {
     setActiveSectionId(section.id);
@@ -132,7 +137,7 @@ export default function CoursePlayer() {
   function handleMarkComplete() {
     if (!activeSubSectionId) return;
     markComplete(activeSubSectionId, {
-      onSuccess: () => toast.success('Section marked as complete!'),
+      onSuccess: () => toast.success('Lesson marked as complete!'),
       onError: (err: Error) => toast.error(err.message),
     });
   }
@@ -189,12 +194,12 @@ export default function CoursePlayer() {
             <div key={section.id}>
               <div
                 className={`px-4 py-2 text-xs font-semibold flex items-center gap-2 ${
-                  isSectionComplete(section.id)
+                  isSectionComplete(section)
                     ? 'text-emerald-400'
                     : 'text-gray-400'
                 }`}
               >
-                {isSectionComplete(section.id) ? (
+                {isSectionComplete(section) ? (
                   <CheckCircle2 className="h-3.5 w-3.5" />
                 ) : (
                   <Circle className="h-3.5 w-3.5" />
@@ -211,6 +216,11 @@ export default function CoursePlayer() {
                       : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/50'
                   }`}
                 >
+                  {isSubSectionComplete(ss.id) ? (
+                    <CheckCircle2 className="h-3 w-3 text-emerald-400 flex-shrink-0" />
+                  ) : (
+                    <Circle className="h-3 w-3 text-gray-600 flex-shrink-0" />
+                  )}
                   <span className="flex-1 truncate">{ss.title}</span>
                   <span className="text-[10px] text-gray-600 flex-shrink-0">
                     {ss.duration}m
@@ -252,7 +262,7 @@ export default function CoursePlayer() {
                   </p>
                 )}
               </div>
-              {!isSectionComplete(activeSectionId ?? 0) ? (
+              {!isSubSectionComplete(activeSubSectionId ?? 0) ? (
                 <Button
                   size="sm"
                   onClick={handleMarkComplete}

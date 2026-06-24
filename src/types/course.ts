@@ -1,5 +1,6 @@
 export type CourseLevel = 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED' | 'EXPERT';
-export type ContentType = 'VIDEO' | 'DOCUMENT' | 'QUIZ' | 'ASSIGNMENT' | 'LIVE_SESSION';
+// Mirrors the Prisma ContentType enum (backend schema.prisma).
+export type ContentType = 'VIDEO' | 'DOCUMENT' | 'AUDIO' | 'PRESENTATION' | 'INTERACTIVE';
 export type EnrollmentStatus = 'ACTIVE' | 'COMPLETED' | 'CANCELLED' | 'SUSPENDED';
 
 export interface Instructor {
@@ -75,7 +76,7 @@ export interface Enrollment {
 
 export interface CourseProgress {
   progress: number;
-  completedSectionIds: number[];
+  completedSubSectionIds: number[];
   lastAccessed: string | null;
   timeSpent: number;
 }

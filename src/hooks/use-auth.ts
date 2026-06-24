@@ -10,11 +10,20 @@ type User = {
   name: string;
 };
 
+type SignUpInput = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  role: 'STUDENT' | 'INSTRUCTOR';
+};
+
 type AuthState = {
   user: User | null;
   isAuthenticated: boolean;
   token: string | null;
   login: (email: string, password: string) => Promise<boolean>;
+  signUp: (input: SignUpInput) => Promise<{ ok: boolean; error?: string }>;
   logout: () => void;
 };
 
@@ -27,6 +36,21 @@ const roleMap: Record<string, UserRole> = {
   MODERATOR: 'teacher',
   SUPPORT: 'teacher',
 };
+
+function toUser(user: {
+  id: number | string;
+  role: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+}): User {
+  return {
+    id: String(user.id),
+    role: roleMap[user.role] ?? 'student',
+    email: user.email,
+    name: `${user.firstName} ${user.lastName}`,
+  };
+}
 
 export const useAuth = create<AuthState>()(
   persist(
@@ -46,12 +70,7 @@ export const useAuth = create<AuthState>()(
 
           const { user, token } = data.data;
           set({
-            user: {
-              id: String(user.id),
-              role: roleMap[user.role] ?? 'student',
-              email: user.email,
-              name: `${user.firstName} ${user.lastName}`,
-            },
+            user: toUser(user),
             isAuthenticated: true,
             token,
           });
@@ -59,6 +78,29 @@ export const useAuth = create<AuthState>()(
         } catch (error) {
           console.error('Login failed:', error);
           return false;
+        }
+      },
+      signUp: async (input: SignUpInput) => {
+        try {
+          const res = await fetch(`${API_URL}/api/auth/signup`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(input),
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.message || 'Sign up failed');
+
+          const { user, token } = data.data;
+          set({
+            user: toUser(user),
+            isAuthenticated: true,
+            token,
+          });
+          return { ok: true };
+        } catch (error) {
+          const message =
+            error instanceof Error ? error.message : 'Sign up failed';
+          return { ok: false, error: message };
         }
       },
       logout: () => set({ user: null, isAuthenticated: false, token: null }),

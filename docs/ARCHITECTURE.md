@@ -18,7 +18,8 @@
                                                      ┌──────────▼─────────────┐
                                                      │  POSTGRESQL  :5432     │
                                                      │                        │
-                                                     │  15 core models        │
+                                                     │  ~35 models (6 wired   │
+                                                     │   in v1; rest reserved)│
                                                      │  Prisma migrations     │
                                                      │  Relational schema     │
                                                      └────────────────────────┘
@@ -40,8 +41,7 @@ src/
 │   ├── learn/                # CoursePlayer
 │   └── dashboard/            # DashboardLayout + role sub-pages
 │       ├── student/
-│       ├── teacher/
-│       └── parent/
+│       └── teacher/
 ├── components/               # Reusable UI components
 │   ├── ui/                   # shadcn/ui components
 │   └── dashboard/menu/       # StudentMenu, TeacherMenu
@@ -171,7 +171,7 @@ User (role: STUDENT | INSTRUCTOR | ADMIN | MODERATOR | SUPPORT)
   ├── enrollments: Enrollment[]    (as student)
   └── courseProgress: CourseProgress[]
 
-Course (status: DRAFT | UNDER_REVIEW | PUBLISHED | ARCHIVED)
+Course (status: DRAFT | REVIEW | PUBLISHED | ARCHIVED | SUSPENDED)
   ├── sections: Section[]
   ├── enrollments: Enrollment[]
   └── progress: CourseProgress[]

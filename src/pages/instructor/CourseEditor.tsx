@@ -87,6 +87,7 @@ function AddSubSectionForm({
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [duration, setDuration] = useState('');
+  const [type, setType] = useState<'VIDEO' | 'DOCUMENT'>('VIDEO');
   const { mutate, isPending } = useCreateSubSection();
 
   function save() {
@@ -100,7 +101,7 @@ function AddSubSectionForm({
           content: content.trim(),
           duration: Number(duration),
           order,
-          type: 'VIDEO',
+          type,
         },
       },
       {
@@ -115,6 +116,30 @@ function AddSubSectionForm({
 
   return (
     <div className="mt-2 p-3 bg-gray-50 rounded-lg space-y-2 border border-gray-200">
+      <div className="flex gap-1">
+        <button
+          type="button"
+          onClick={() => setType('VIDEO')}
+          className={`flex-1 text-xs py-1.5 rounded-md border transition-colors ${
+            type === 'VIDEO'
+              ? 'bg-blue-600 text-white border-blue-600'
+              : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-100'
+          }`}
+        >
+          Video
+        </button>
+        <button
+          type="button"
+          onClick={() => setType('DOCUMENT')}
+          className={`flex-1 text-xs py-1.5 rounded-md border transition-colors ${
+            type === 'DOCUMENT'
+              ? 'bg-blue-600 text-white border-blue-600'
+              : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-100'
+          }`}
+        >
+          Document
+        </button>
+      </div>
       <Input
         autoFocus
         placeholder="Lesson title"
@@ -123,7 +148,11 @@ function AddSubSectionForm({
         className="text-sm"
       />
       <Input
-        placeholder="Video URL (YouTube link or direct video URL)"
+        placeholder={
+          type === 'VIDEO'
+            ? 'Video URL (YouTube link or direct video URL)'
+            : 'Document URL (link to PDF, doc, or article)'
+        }
         value={content}
         onChange={(e) => setContent(e.target.value)}
         className="text-sm"

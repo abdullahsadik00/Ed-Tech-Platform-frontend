@@ -21,7 +21,7 @@ export function useMarkSubSectionComplete(courseId: number) {
   return useMutation({
     mutationFn: (subSectionId: number) =>
       api.post<
-        ApiResponse<Pick<CourseProgress, 'progress' | 'completedSectionIds'>>
+        ApiResponse<Pick<CourseProgress, 'progress' | 'completedSubSectionIds'>>
       >(`/api/progress/${courseId}/subsections/${subSectionId}`, {}),
     onSuccess: (response) => {
       queryClient.setQueryData(
@@ -33,7 +33,7 @@ export function useMarkSubSectionComplete(courseId: number) {
             data: {
               ...old.data,
               progress: response.data.progress,
-              completedSectionIds: response.data.completedSectionIds,
+              completedSubSectionIds: response.data.completedSubSectionIds,
             },
           };
         }
