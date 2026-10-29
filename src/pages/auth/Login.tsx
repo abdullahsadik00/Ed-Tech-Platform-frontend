@@ -2,11 +2,18 @@ import { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/use-auth';
 
+// Public demo accounts, created by the backend seed (prisma/seed.ts).
+const DEMO_ACCOUNTS = [
+  { label: 'Demo student', email: 'demo.student@example.com', home: '/student' },
+  { label: 'Demo instructor', email: 'demo.instructor@example.com', home: '/teacher' },
+] as const;
+const DEMO_PASSWORD = 'Demo@1234';
+
 const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = (location.state as { from?: string })?.from || '/student';
+  const from = (location.state as { from?: string })?.from;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,9 +27,22 @@ const LoginPage = () => {
     const success = await login(email, password);
     setLoading(false);
     if (success) {
-      navigate(from, { replace: true });
+      const role = useAuth.getState().user?.role;
+      navigate(from || (role === 'teacher' ? '/teacher' : '/student'), { replace: true });
     } else {
       setError('Invalid email or password');
+    }
+  };
+
+  const handleDemoLogin = async (account: (typeof DEMO_ACCOUNTS)[number]) => {
+    setError('');
+    setLoading(true);
+    const success = await login(account.email, DEMO_PASSWORD);
+    setLoading(false);
+    if (success) {
+      navigate(from || account.home, { replace: true });
+    } else {
+      setError('The demo is unavailable right now. Please try again shortly.');
     }
   };
 
@@ -74,6 +94,25 @@ const LoginPage = () => {
             {loading ? 'Signing in…' : 'Sign In'}
           </button>
         </form>
+
+        <div className="space-y-2">
+          <p className="text-center text-xs uppercase tracking-wide text-gray-400">
+            Or try the demo
+          </p>
+          <div className="grid grid-cols-2 gap-2">
+            {DEMO_ACCOUNTS.map((account) => (
+              <button
+                key={account.email}
+                type="button"
+                disabled={loading}
+                onClick={() => handleDemoLogin(account)}
+                className="border rounded-md py-2 text-sm font-medium hover:bg-gray-50 disabled:opacity-50"
+              >
+                {account.label}
+              </button>
+            ))}
+          </div>
+        </div>
 
         <p className="text-center text-sm text-gray-500">
           Don't have an account?{' '}
