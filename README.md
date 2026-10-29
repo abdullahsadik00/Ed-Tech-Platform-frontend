@@ -7,6 +7,17 @@ courses and students enroll and track their progress.
 This is the **frontend** only. It talks to the [Ed-Tech Platform backend](https://github.com/abdullahsadik00/Ed-Tech-Platform-backend)
 (Express + Prisma + PostgreSQL) over a JSON API.
 
+**[Live demo](https://ed-tech-platform-frontend-two.vercel.app)**: on the sign-in page, click **Demo student** or **Demo instructor**, or sign in manually:
+
+| Role | Email | Password |
+|---|---|---|
+| Student | `demo.student@example.com` | `Demo@1234` |
+| Instructor | `demo.instructor@example.com` | `Demo@1234` |
+
+Demo data is reset on every backend deploy.
+
+![Course catalog](docs/course-catalog.jpg)
+
 ## Tech stack
 
 - **React 18** + **TypeScript** + **Vite**
@@ -15,6 +26,10 @@ This is the **frontend** only. It talks to the [Ed-Tech Platform backend](https:
 - **Zustand** (with `persist`) for auth state (`src/hooks/use-auth.ts`)
 - **Tailwind CSS v4** + **shadcn/ui** + Radix primitives
 - **framer-motion** for animation
+
+## Deployment
+
+Hosted on Vercel and auto-deployed from `main`. `VITE_API_URL` points at the production API (https://ed-tech-platform-backend-ten.vercel.app).
 
 ## Features (v1)
 
