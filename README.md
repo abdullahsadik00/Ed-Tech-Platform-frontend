@@ -4,7 +4,7 @@ React + TypeScript single-page app for the Ed-Tech Platform: a course
 marketplace and learning experience where instructors publish video/document
 courses and students enroll and track their progress.
 
-This is the **frontend** only. It talks to the [Ed-Tech Platform backend](../Ed-Tech-Platform-backend)
+This is the **frontend** only. It talks to the [Ed-Tech Platform backend](https://github.com/abdullahsadik00/Ed-Tech-Platform-backend)
 (Express + Prisma + PostgreSQL) over a JSON API.
 
 ## Tech stack

@@ -266,7 +266,7 @@ export const AppleCard = ({
   );
 };
 
-interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> { }
+type ImageProps = React.ImgHTMLAttributes<HTMLImageElement>;
 
 export const BlurImage = ({
   height,

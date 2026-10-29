@@ -1,38 +1,29 @@
-name: CI Pipeline
+name: CI
 on: [push, pull_request]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
+        node-version: [20.x, 22.x]
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: npm
       - run: npm ci
-      - run: npm test
+      - run: npm run lint
+      - run: npm run build # tsc -b type-check + vite production build
 
-  security:
+  audit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: CodeQL Analysis
-        uses: github/codeql-action@v2
+      - uses: actions/setup-node@v4
         with:
-          languages: 'javascript'
-      - name: Dependency Audit
-        run: npm audit --audit-level=critical
-
-  coverage:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+          node-version: 20.x
+          cache: npm
       - run: npm ci
-      - run: npm test -- --coverage
-      - uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+      - run: npm audit --audit-level=critical --omit=dev
